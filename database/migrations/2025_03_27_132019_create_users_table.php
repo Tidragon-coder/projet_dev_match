@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('profile_picture')->unique()->nullable()->after('sexe');
             $table->text('biography')->nullable()->after('profile_picture');
             $table->string('speciality')->after('biography');
-            $table->bigInteger('projets_id')->unsigned()->after('speciality');
+            $table->bigInteger('projets_id')->unsigned()->nullable()->after('speciality');
             $table->foreign('projets_id')->references('id')->on('projets')->onDelete('cascade'); // Clé étrangère
             $table->tinyInteger('year_experience')->after('projets_id')->nullable();
         });
