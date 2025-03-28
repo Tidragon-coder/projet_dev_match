@@ -73,6 +73,18 @@ class UserController extends Controller
         }
     
         return response()->json(['message' => 'Invalid credentials'], 401);
+
+    }
+    
+    public function profile(Request $request) 
+    {
+        $user = auth()->user();
+        if(!$user) {
+            //return redirect()->route('login')->with('error', 'You are not logged in');
+            return response()->json(['message' => 'You are not logged in'], 500);
+        }
+        return response()->json($request->user()); //return response()->json($user, 200);
+        
     }
     
 
