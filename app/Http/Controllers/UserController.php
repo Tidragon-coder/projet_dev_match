@@ -51,4 +51,29 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage())->withInput();
         }
     }
+
+    public function login(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+    
+        $credentials = $request->only('email', 'password');
+    
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+    
+            // Retourne uniquement JSON (Postman)
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'message' => 'User logged in successfully',
+                'user' => $user,
+                'token' => $token
+            ], 200);
+        }
+    
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
+    
+
 }

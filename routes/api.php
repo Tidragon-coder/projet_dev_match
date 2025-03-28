@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
  
 // Route::get('/users', [UserController::class, 'index']);
 Route::post('/users/register', [UserController::class, 'register'])->name('api.register');
+Route::post('/users/login', [UserController::class, 'login'])->name('api.login');
