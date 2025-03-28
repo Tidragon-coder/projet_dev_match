@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::post('/users/register', [UserController::class, 'register'])->name('api.register');
 Route::post('/users/login', [UserController::class, 'login'])->name('api.login');
 Route::get('/users/profile', [UserController::class, 'profile'])->middleware('auth:sanctum')->name('api.profile');
+Route::post('/users/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
