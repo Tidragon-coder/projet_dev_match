@@ -26,6 +26,8 @@ class User extends Authenticatable
         'sexe',
         'age',
         'projet_id',
+        'biography',
+        'year_experience',
     ];
 
     /**

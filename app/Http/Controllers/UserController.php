@@ -91,6 +91,63 @@ class UserController extends Controller
         $request->user()->tokens()->delete();
         return response()->json(['message' => 'Logged out'], 200);
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $user = User::find($id);
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255|unique:users,name,' . $user->id,
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'password' => 'nullable|string|min:4',
+                'age' => 'required|integer',
+                'sexe' => 'required|string|max:10',
+                'speciality' => 'required|string|max:100',
+                'profile_picture' => 'nullable|string',
+                'biography' => 'nullable|string',
+                'year_experience' => 'nullable|integer',
+            ]);
+
+
+            if ($request->filled('password')) {
+                $validatedData['password'] = bcrypt($request->password);
+            }
+
+
+            if (!empty($validatedData)) {
+                $user->update($validatedData);
+            }
+
+
+            $user->refresh();
+
+            return response()->json([
+                'message' => 'User updated successfully',
+                'user' => $user
+            ], 200);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'message' => 'Database error',
+                'error' => $e->getMessage()
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Unexpected error',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     
 
 }
