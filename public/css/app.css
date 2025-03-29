@@ -1,0 +1,173 @@
+:root {
+    --bg-color: #ffffff;
+    /* Fond sombre */
+    --text-color: #000000;
+    /* Texte clair */
+    --accent-color: #ffc848;
+    --tier-color:#EF8F00;
+    scroll-behavior: smooth;
+  }
+  /* ---------- Variables Light / Dark ---------- */
+  body.dark{
+    --bg-color: #000000;
+    /* Fond clair */
+    --text-color: #ffffff;
+    
+    
+  
+  }
+
+
+
+/* Conteneur principal */
+body {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.container_form {
+    
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre */
+.container_form h2 {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container_form .text_welcome {
+    text-align: center;
+}
+
+/* Message de succès et d'erreur */
+.bg-green-500 {
+    background-color: #48bb78;
+}
+
+.bg-red-500 {
+    background-color: #f56565;
+}
+
+.text-white {
+    color: white;
+}
+
+.p-3 {
+    padding: 12px;
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.mb-4 {
+    margin-bottom: 20px;
+}
+
+/* Formulaire */
+form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.container_label {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    /* background-color: var(--tier-color); */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: var(--tier-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--tier-color);
+}
+
+/* Container pour la section de connexion */
+.container_login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text_login {
+    font-size: 14px;
+    color: #555;
+}
+
+.text_login a {
+    color: var(--tier-color);
+    text-decoration: none;
+}
+
+.text_login a:hover {
+    text-decoration: underline;
+}
+
+/***** profile view ******/
+.profile-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+.info {
+    margin-top: 10px;
+    font-size: 18px;
+}
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: darkred;
+}
