@@ -28,6 +28,7 @@ class User extends Authenticatable
         'projet_id',
         'biography',
         'year_experience',
+        'profile_picture',
     ];
 
     /**
