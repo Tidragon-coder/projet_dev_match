@@ -1,22 +1,26 @@
 :root {
-    --bg-color: #ffffff;
+    --bg-color: #000000;
+    --red: #f51010;
+    --white: #fff;
     /* Fond sombre */
-    --text-color: #000000;
+    --text-color: #ffc848;
     /* Texte clair */
-    --accent-color: #ffc848;
+    --accent-color: #000;
     --tier-color:#EF8F00;
+    --border-color:#be7910;
     scroll-behavior: smooth;
     --font-family: "Montserrat", sans-serif;
   }
   /* ---------- Variables Light / Dark ---------- */
-  body.dark{
+  /* body.dark{
     --bg-color: #000000;
-    /* Fond clair */
-    --text-color: #ffffff;
+ 
+    --text-color: #ffc848;
+    --accent-color: #000;
     
     
   
-  }
+  } */
 
 
 
@@ -31,7 +35,18 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: -50px;
+ padding-left: 25px;
+    padding-right: 25px;
+}
+
+.container1 {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
  padding-left: 25px;
     padding-right: 25px;
 }
@@ -44,6 +59,7 @@ body {
     background-color: var(--accent-color);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: solid 2px  var(--border-color);
 }
 
 .container_form1 {
@@ -51,10 +67,11 @@ body {
     max-width: 600px;
     margin: 0 auto;
     margin-top: 100px;
-    padding: 15px;
+    padding: 25px;
     background-color: var(--accent-color);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: solid 2px  var(--border-color);
 }
 
 
@@ -63,7 +80,7 @@ body {
 /* Titre */
 .container_form1 h2 {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
     margin-bottom: 20px;
  }
@@ -99,7 +116,7 @@ body {
 /* Titre */
 .container_form h2 {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
     margin-bottom: 20px;
  }
@@ -107,8 +124,8 @@ body {
 .container_form .text_welcome {
     margin-top: 10px;
     text-align: center;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 400;
 }
 
 .container_form .text_welcome1 {
@@ -160,8 +177,8 @@ form {
 
 .form-label {
     font-size: 14px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 400;
+    color: var(--tier-color);
 }
 
 .btn-validation {
@@ -184,8 +201,9 @@ form {
 
 
 .logo {
-    width: 85px;
+    width: 110px;
     border: none;
+    height: 110px;
 }
 
 .container_label_picture {
@@ -214,25 +232,22 @@ form {
     
 }
 
-.btn-file {
-    background-color: #48bb78;
-}
+
 
 
 
 .btn-primary {
-    background-color: var(--accent-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
     padding: 10px 20px;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: 1px solid var(--text-color);
 }
 
-.btn-primary:hover {
-    background-color: var(--tier-color);
-}
+
 
 /* Container pour la section de connexion */
 .container_login {
@@ -242,7 +257,7 @@ form {
 
 .text_login {
     font-size: 14px;
-    color: #555;
+    color: var(--white);
 }
 
 .text_login a {
@@ -255,17 +270,28 @@ form {
 }
 
 .nav-register-login {
+    height: 100px;
+    position: relative;
     background-color: var(--accent-color);
     display: flex;
-    justify-content: center;
+    align-items: center;  /* Centre verticalement */
+    justify-content: space-between; /* Répartit l'espace : logo centré, icône à droite */
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid var(--border-color);
 }
 
-.nav-register-login img {
-    width:90px;
-    height:90px;
-    border-radius: none;
-    border: none;
+.logo1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centre l'image horizontalement */
 }
+
+.nav-register-login i {
+    margin-left: auto; 
+}
+
 
 .text_data {
     margin-top: 10px;
@@ -274,33 +300,127 @@ form {
 }
 
 /***** profile view ******/
-.profile-container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+
+.logout_btn_container {
+    text-align: right; /* Aligner le bouton à droite */
 }
-img {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    /* border: 3px solid #ddd; */
+
+.logout_btn_container form {
+    display: inline-block; /* Ajuster le formulaire à la taille du bouton */
 }
-.info {
-    margin-top: 10px;
-    font-size: 18px;
-}
-button {
-    margin-top: 15px;
+
+.logout_btn_container button {
+    display: flex; /* Permet d'aligner l'icône et le texte */
+    align-items: center; /* Centre verticalement */
+    gap: 8px; /* Ajoute un espace entre l'icône et le texte */
+    width: auto;
     padding: 10px 20px;
-    background-color: red;
-    color: white;
+    background: none;
+    color: var(--red);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-button:hover {
-    background-color: darkred;
+
+.logout_btn_container button i {
+    font-size: 16px; /* Taille de l'icône */
+}
+
+.container_infos {
+    color: var(--white);
+    margin-top: 10px;
+    /* background-color: #476152; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_infos .container_welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.container_infos .container_welcome .welcome_profile{
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+.container_infos .container_welcome .welcome_profile_espace{
+    color: var(--white);
+    font-size: 0.9rem;
+}
+
+.container_infos .container_welcome .last_connexion{
+    font-size: 0.6rem;
+    color: var(--tier-color);
+}
+
+ .infos_container {
+    color:var(--white);
+    padding-left: 50px;
+    /* background-color: #48bb78; */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+
+
+} .infos_container .title_infos_container{
+   gap: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+  }
+
+ .infos_container .title_infos_container button{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: var(--tier-color);
+    background: none;
+    border: none;
+   }
+
+ .infos_container .title_infos_container i{
+    color: var(--tier-color);
+    font-size: 1.1rem;
+   }
+
+   .infos_container .title_infos_container h2{
+    font-weight: bold;
+    font-size: 1.1rem;
+   }
+
+
+.all_infos_container {
+    margin-top: 30px;
+    /* background-color: #48bb78; */
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    /* margin-right: 20px; */
+}
+
+.all_infos_container .info_user {
+    display: flex;
+    gap: 25px;
+}
+
+.all_infos_container .info_user i {
+    font-size: 1.2rem;
+}
+
+.info_user_picture img {
+    border: 2px solid var(--tier-color);
+    margin-bottom: 20px;
+    width: 150px; /* L'image prend toute la largeur */
+    height: 150px;
+    object-fit: cover; /* Assure que l'image couvre bien l'espace sans être déformée */
+    border-radius: 50%; /* Garde l'effet cercle même si l'image a un fond transparent */
 }

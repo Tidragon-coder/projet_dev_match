@@ -5,6 +5,9 @@
 @section('content')
 <div class="nav-register-login">
     <img class="logo1" src="images/logo.png" alt="" width="100px">
+    
+
+    <!-- <i class="fa-solid fa-circle-half-stroke"></i> -->
 </div>
 <div class="container">
 
@@ -121,7 +124,7 @@
 
     <div class="container_login">
             <p class="text_login">
-                Déjà inscrit? 
+                Vous evez déjà un compte ? 
                 <a href="{{ route('login') }}">
                     Se connecter
                 </a>

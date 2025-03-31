@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -16,8 +17,8 @@ class UserController extends Controller
                 'pseudo' => 'required|string|max:255|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:4',
-                'age'=> 'required|int',
-                'sexe'=> 'required',
+                'age'=> 'nullable|int',
+                'sexe'=> 'nullable',
                 'speciality'=> 'required|string',
                 'profile_picture'=> 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
@@ -79,6 +80,9 @@ class UserController extends Controller
 
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
+            $user->last_login_at = Carbon::now();
+            $user->save();
+
             $token = $user->createToken('auth_token')->plainTextToken;
 
             // Vérifier si la requête est AJAX ou API
@@ -132,10 +136,23 @@ class UserController extends Controller
                 'age' => 'required|integer',
                 'sexe' => 'required|string|max:10',
                 'speciality' => 'required|string|max:100',
-                'profile_picture' => 'nullable|string',
+                'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
                 'biography' => 'nullable|string',
                 'year_experience' => 'nullable|integer',
             ]);
+
+            // Gestion du mot de passe (ne pas le mettre à jour s'il est vide)
+            if ($request->filled('password')) {
+                $validatedData['password'] = bcrypt($request->password);
+             } else {
+            unset($validatedData['password']);
+            }
+
+    // Gestion de l'upload de l'image
+    if ($request->hasFile('profile_picture')) {
+        $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+        $validatedData['profile_picture'] = $imagePath;
+    }
             
         
             // Mise à jour des informations de l'utilisateur

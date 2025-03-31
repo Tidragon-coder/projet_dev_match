@@ -5,9 +5,13 @@
 @section('content')
 <div class="nav-register-login">
     <img class="logo1" src="images/logo.png" alt="" width="100px">
+    
+
+    <!-- <i class="fa-solid fa-circle-half-stroke"></i> -->
 </div>
 
-<div class="container">
+
+<div class="container1">
 <div class="container_form1">
         <h2>Bienvenue sur MatchWork ! </h2>
         <p class="text_welcome">Trouvez des profils complémentaires et formez l’équipe parfaite.</p>
@@ -46,13 +50,11 @@
                 <input type="password" name="password" id="password" placeholder="Votre mot de passe" class="form-control">
             </div>
             
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
                 <input type="checkbox" name="remember" id="remember" class="form-control">
                 <label for="remember" class="ml-2 block text-sm text-slate-300">Se souvenir de moi</label>
-            </div>
-            <button type="submit" class="btn btn-primary">
-                    Se connecter
-                </button>
+            </div> -->
+            
             
         </form>
        
