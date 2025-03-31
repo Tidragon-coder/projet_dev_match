@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+@extends('layouts.app')
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <title>Document</title>
-</head>
-<body>
-<div class="container_form">
+@section('title', 'Inscription')
+
+@section('content')
+<div class="nav-register-login">
+    <img class="logo1" src="images/logo.png" alt="" width="100px">
+</div>
+
+<div class="container">
+<div class="container_form1">
         <h2>Bienvenue sur MatchWork ! </h2>
         <p class="text_welcome">Trouvez des profils complémentaires et formez l’équipe parfaite.</p>
         
@@ -52,14 +51,16 @@
                 <label for="remember" class="ml-2 block text-sm text-slate-300">Se souvenir de moi</label>
             </div>
             
-            <div>
+            
+        </form>
+       
+    </div>
+
+    <div>
                 <button type="submit" class="btn btn-primary">
                     Se connecter
                 </button>
             </div>
-        </form>
-       
-    </div>
 
     <form action="{{ route('register.submit') }}" method="POST">
         
@@ -73,5 +74,8 @@
                 </a>
             </p>
         </div>
-</body>
-</html>
+        </div>
+        
+        
+
+        @endsection
