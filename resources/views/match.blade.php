@@ -12,7 +12,8 @@
     <p>Pseudo : {{ $user->pseudo }}</p>
     <p>Âge : {{ $user->age }}</p>
     <p>Spécialité : {{ $user->speciality }}</p>
-    <p>Biographie : {{ $user->biography }}</p>
+    <p>Biographie : {{ $user->biography }}</p> 
+    <p>Sexe : {{ $user->sexe }}</p>
 
     <form method="GET" action="{{ route('match') }}">
         @csrf
