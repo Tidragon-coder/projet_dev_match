@@ -7,5 +7,10 @@
 </head>
 <body>
     match
+
+    <form method="GET" action="{{ route('profile') }}">
+            @csrf
+            <button type="submit">acceder au profile</button>
+    </form>
 </body>
 </html>

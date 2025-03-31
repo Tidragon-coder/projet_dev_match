@@ -25,6 +25,7 @@
         <p class="info"><strong>Âge :</strong> {{ auth()->user()->age }} ans</p>
         <p class="info"><strong>Sexe :</strong> {{ auth()->user()->sexe }}</p>
         <p class="info"><strong>Spécialité :</strong> {{ auth()->user()->speciality }}</p>
+        <p class="info"><strong>Année(s) d'expérience :</strong> {{ auth()->user()->year_experience }}</p>
 
         <!-- Biographie si elle existe -->
         @if(auth()->user()->biography)
@@ -38,6 +39,16 @@
             @csrf
             <button type="submit">Se déconnecter</button>
         </form>
+        <form method="PUT" action="{{ route('edit') }}">
+            @csrf
+            <button type="submit">Modifier</button>
+        </form>
+        <form method="GET" action="{{ route('match') }}">
+            @csrf
+            <button type="submit">acceder au match</button>
+        </form>
+        
+     
     </div>
 
 </body>
