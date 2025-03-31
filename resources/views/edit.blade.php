@@ -13,6 +13,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" name="pseudo" id="pseudo" class="form-control" value="{{ old('pseudo', $user->pseudo) }}" required>
+            </div>
+
+            <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" required>
             </div>

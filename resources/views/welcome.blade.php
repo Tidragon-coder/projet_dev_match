@@ -44,6 +44,11 @@
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
+
+            <div class="container_label">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo" required>
+            </div>
             
             <div class="container_label">
                 <label for="email" class="form-label">Email</label>
@@ -57,7 +62,7 @@
 
             <div class="container_label">
                 <label for="age" class="form-label">Âge</label>
-                <input type="number" class="form-control" id="age" name="age" required>
+                <input type="number" class="form-control" id="age" name="age" required min="16" max="99">
             </div>
 
             <div class="container_label">

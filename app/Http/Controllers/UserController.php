@@ -12,7 +12,8 @@ class UserController extends Controller
         try {
             // Validation des données du formulaire
             $request->validate([
-                'name' => 'required|string|max:255|unique:users',
+                'name' => 'required|string|max:255',
+                'pseudo' => 'required|string|max:255|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:4',
                 'age'=> 'required|int',
@@ -31,6 +32,7 @@ class UserController extends Controller
             // Création de l'utilisateur
             $user = User::create([
                 'name' => $request->name,
+                'pseudo' => $request->pseudo,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'speciality' => $request->speciality,
@@ -123,8 +125,9 @@ class UserController extends Controller
        
             // Validation des données du formulaire
             $validatedData = $request->validate([
-                'unique:users,name,' . auth()->id(),
-                'unique:users,email,' . auth()->id(),
+                'name' => 'required|string|max:255' . auth()->id(),
+                'pseudo' => 'required|string|max:255|unique:users,pseudo,' . auth()->id(),
+                'email' => 'required|email|unique:users,email,' . auth()->id(),
                 'password' => 'nullable|string|min:4',
                 'age' => 'required|integer',
                 'sexe' => 'required|string|max:10',
@@ -133,6 +136,7 @@ class UserController extends Controller
                 'biography' => 'nullable|string',
                 'year_experience' => 'nullable|integer',
             ]);
+            
         
             // Mise à jour des informations de l'utilisateur
             auth()->user()->update($validatedData);

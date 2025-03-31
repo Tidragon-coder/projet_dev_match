@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::table('users', function (Blueprint $table) {
+            $table->string('pseudo')->after('name')->nullable();
             $table->tinyInteger('age')->after('email')->nullable(); // Ajout d'une colonne après 'email'
             $table->enum('sexe', ['homme', 'femme', 'autre'])->after('age')->nullable(); // Enum avec valeurs
             $table->string('profile_picture')->unique()->nullable()->after('sexe');

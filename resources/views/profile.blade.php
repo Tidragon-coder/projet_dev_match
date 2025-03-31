@@ -21,6 +21,7 @@
         
         <!-- Informations utilisateur -->
         <h2>{{ auth()->user()->name }}</h2>
+        <p class="info"><strong>Nom d'utilisateur :</strong> {{ auth()->user()->pseudo }}</p>
         <p class="info"><strong>Email :</strong> {{ auth()->user()->email }}</p>
         <p class="info"><strong>Âge :</strong> {{ auth()->user()->age }} ans</p>
         <p class="info"><strong>Sexe :</strong> {{ auth()->user()->sexe }}</p>
