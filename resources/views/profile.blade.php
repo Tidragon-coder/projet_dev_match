@@ -45,9 +45,9 @@
             <button type="submit">Modifier</button>
         </form>
         <form method="GET" action="{{ route('match') }}">
-            @csrf
-            <button type="submit">acceder au match</button>
+            <button type="submit">Accéder au match</button>
         </form>
+
         
      
     </div>

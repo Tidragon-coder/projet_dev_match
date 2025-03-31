@@ -164,9 +164,13 @@ class UserController extends Controller
         return redirect()->route('welcome')->with('success', 'Logged out successfully');
     }
 
-    public function showmatch() {
-        return view('match');
+
+    public function randomProfile()
+    {
+        $user = \App\Models\User::inRandomOrder()->first();
+        return view('match', ['user' => $user]);
     }
+
     
 
 }
