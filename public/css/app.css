@@ -63,11 +63,10 @@ body {
 /* Titre */
 .container_form1 h2 {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.5rem;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
-}
+ }
 
 .container_form1 .text_welcome {
     margin-top: 10px;
@@ -77,6 +76,42 @@ body {
 }
 
 .container_form1 .text_welcome1 {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: 500;
+}
+
+.container_form {
+    
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 15px;
+    background-color: var(--accent-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+/* Titre */
+.container_form h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+ }
+
+.container_form .text_welcome {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.container_form .text_welcome1 {
     margin-top: 10px;
     text-align: center;
     font-size: 0.6rem;
@@ -162,7 +197,21 @@ form {
 }
 
 .container_profile-pic-logo {
+  
     display: flex;
+    align-items: center;
+   justify-content: space-between;
+    
+}
+
+.container_profile-pic-logo .container_label {
+    margin-bottom: 40px;
+}
+
+.container_profile-pic-logo .logo{
+  
+    border-radius: 0px;
+    
 }
 
 .btn-file {

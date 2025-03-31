@@ -41,7 +41,7 @@
     @csrf
 
     <div class="container_label">
-        <label for="name" class="form-label">Nom</label>
+        <label for="name" class="form-label">Nom d'utilisateur</label>
         <input type="text" class="form-control" id="name" name="name" required>
     </div>
 
@@ -60,20 +60,20 @@
         <input type="password" class="form-control" id="password" name="password" required autocomplete="off">
     </div>
 
-    <div class="container_label">
+    <!-- <div class="container_label">
         <label for="age" class="form-label">Âge</label>
         <input type="number" class="form-control" id="age" name="age" required min="16" max="99">
-    </div>
+    </div> -->
 
-    <div class="container_label">
+    <!-- <div class="container_label">
         <label for="sexe" class="form-label">Sexe</label>
         <select class="form-control" id="sexe" name="sexe" required>
             <option value="Homme">Homme</option>
             <option value="Femme">Femme</option>
             <option value="Autre">Autre</option>
         </select>
-    </div>
-
+    </div> -->
+ <div class="container_profile-pic-logo">
     <div class="container_label">
         <label for="speciality" class="form-label">Spécialité</label>
         <select class="form-control" id="speciality" name="speciality" required>
@@ -82,14 +82,17 @@
             <option value="webdesign">Webdesign</option>
             <option value="graphiste">Graphiste</option>
         </select>
+        
     </div>
+    <img class="logo" src="/images/logo2.png" alt="Logo">
+</div>
 
-    <div class="container_label">
+    <!-- <div class="container_label">
         <label for="year_experience" class="form-label">Année d'expérience</label>
         <input type="number" class="form-control" id="year_experience" name="year_experience" required min="0" max="99">
-    </div>
+    </div> -->
 
-    <div class="container_profile-pic-logo">
+    <!-- <div class="container_profile-pic-logo">
     <div class="container_label_picture">
         <label for="profile_picture" class="form-label">Photo de profil</label>
         <div class="mt-1 flex items-center">
@@ -101,7 +104,7 @@
         <div id="file-name" class="mt-2 text-sm text-slate-400"></div>
     </div>
     <img class="logo" src="/images/logo2.png" alt="Logo">
-    </div>
+    </div> -->
 </form>
 
        

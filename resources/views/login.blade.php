@@ -34,7 +34,7 @@
             </div>
         @endif
         
-        <form method="POST" action="{{ route('login.submit') }}" class="space-y-4">
+        <form id="login-form" method="POST" action="{{ route('login.submit') }}" class="space-y-4">
             @csrf
             <div class="container_label">
                 <label for="email" class="form_label">Email</label>
@@ -50,21 +50,21 @@
                 <input type="checkbox" name="remember" id="remember" class="form-control">
                 <label for="remember" class="ml-2 block text-sm text-slate-300">Se souvenir de moi</label>
             </div>
-            
+            <button type="submit" class="btn btn-primary">
+                    Se connecter
+                </button>
             
         </form>
        
     </div>
 
-    <div>
-                <button type="submit" class="btn btn-primary">
+    <button form="login-form" type="submit" class="btn btn-primary">
                     Se connecter
                 </button>
-            </div>
 
-    <form action="{{ route('register.submit') }}" method="POST">
-        
-    </form>
+    <div>
+             
+   
 
     <div class="container_login">
             <p class="text_login">
