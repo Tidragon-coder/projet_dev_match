@@ -67,50 +67,50 @@ class UserController extends Controller
 
 
     public function login(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
-    $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-    if (auth()->attempt($credentials)) {
-        $user = auth()->user();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            $token = $user->createToken('auth_token')->plainTextToken;
 
-        // Vérifier si la requête est AJAX ou API
-        if ($request->expectsJson()) {
-            return response()->json([
-                'message' => 'User logged in successfully',
-                'user' => $user,
-                'token' => $token
-            ], 200);
+            // Vérifier si la requête est AJAX ou API
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'User logged in successfully',
+                    'user' => $user,
+                    'token' => $token
+                ], 200);
+            }
+
+            
+            return redirect()->route('profile');
         }
 
+        // Gérer l'échec d'authentification
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+
+        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+    }
+
+    
+    public function profile()
+    {
+        $user = auth()->user();
         
-        return redirect()->route('profile');
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'You are not logged in');
+        }
+
+        return view('profile', compact('user')); // Retourne la vue au lieu du JSON
     }
-
-    // Gérer l'échec d'authentification
-    if ($request->expectsJson()) {
-        return response()->json(['message' => 'Invalid credentials'], 401);
-    }
-
-    return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
-}
-
-    
-public function profile()
-{
-    $user = auth()->user();
-    
-    if (!$user) {
-        return redirect()->route('login')->with('error', 'You are not logged in');
-    }
-
-    return view('profile', compact('user')); // Retourne la vue au lieu du JSON
-}
 
 
     public function logout(Request $request) {
@@ -118,17 +118,13 @@ public function profile()
         return response()->json(['message' => 'Logged out'], 200);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        try {
-            $user = User::find($id);
-            if (!$user) {
-                return response()->json(['message' => 'User not found'], 404);
-            }
-
+       
+            // Validation des données du formulaire
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255|unique:users,name,' . $user->id,
-                'email' => 'required|email|unique:users,email,' . $user->id,
+                'unique:users,name,' . auth()->id(),
+                'unique:users,email,' . auth()->id(),
                 'password' => 'nullable|string|min:4',
                 'age' => 'required|integer',
                 'sexe' => 'required|string|max:10',
@@ -137,42 +133,18 @@ public function profile()
                 'biography' => 'nullable|string',
                 'year_experience' => 'nullable|integer',
             ]);
+        
+            // Mise à jour des informations de l'utilisateur
+            auth()->user()->update($validatedData);
 
-
-            if ($request->filled('password')) {
-                $validatedData['password'] = bcrypt($request->password);
-            }
-
-
-            if (!empty($validatedData)) {
-                $user->update($validatedData);
-            }
-
-
-            $user->refresh();
-
-            return response()->json([
-                'message' => 'User updated successfully',
-                'user' => $user
-            ], 200);
-
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $e->errors()
-            ], 422);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return response()->json([
-                'message' => 'Database error',
-                'error' => $e->getMessage()
-            ], 500);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Unexpected error',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+            return redirect()->route('profile')->with('success', 'Profil mis à jour !');   
     }
+
+    public function showedit()
+    {
+        return view('edit', ['user' => auth()->user()]);
+    }
+
 
     public function showRegister()
     {
@@ -186,6 +158,10 @@ public function profile()
     public function webLogout() {
         auth()->logout();
         return redirect()->route('welcome')->with('success', 'Logged out successfully');
+    }
+
+    public function showmatch() {
+        return view('match');
     }
     
 
