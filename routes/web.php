@@ -19,5 +19,5 @@ Route::middleware('auth')->group(function() {
     Route::post('/logout', [UserController::class, 'webLogout'])->name('logout');
     Route::get('/profile/edit', [UserController::class, 'showedit'])->name('edit'); // Affichage du formulaire
     Route::post('/profile/edit', [UserController::class, 'update'])->name('update');
-    Route::post('/match', [UserController::class, 'showmatch'])->name('match');
+    Route::get('/match', [UserController::class, 'showmatch'])->name('match');
 });
