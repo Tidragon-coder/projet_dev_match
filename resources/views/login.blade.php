@@ -103,6 +103,12 @@ button[form="login-form"] {
   width: 100%;
   cursor: pointer;
 }
+.btn-primary:disabled {
+  background-color: #444 !important;
+  color: #aaa !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 .btn-primary:hover {
   background-color: #e6b838;
@@ -208,9 +214,9 @@ margin-top: 50px;
        
     </div>
 
-    <button form="login-form" type="submit" class="btn btn-primary">
-                    Se connecter
-                </button>
+    <button form="login-form" type="submit" class="btn btn-primary" id="login-btn" disabled>
+    Se connecter
+</button>
 
     <div>
              
@@ -225,7 +231,28 @@ margin-top: 50px;
             </p>
         </div>
         </div>
-        
+        <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('login-btn');
+
+    function checkFields() {
+        if (emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+            loginBtn.disabled = false;
+        } else {
+            loginBtn.disabled = true;
+        }
+    }
+
+    emailInput.addEventListener('input', checkFields);
+    passwordInput.addEventListener('input', checkFields);
+
+    // Initial check
+    checkFields();
+});
+</script>
+
         
 
         @endsection
