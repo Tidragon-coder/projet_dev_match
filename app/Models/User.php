@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Swipe;
+use App\Models\UserMatch;
+
 
 class User extends Authenticatable
 {
@@ -54,4 +57,35 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+        // Swipes que l'utilisateur a faits
+    public function swipesGiven()
+    {
+        return $this->hasMany(Swipe::class, 'swiper_user_id');
+    }
+
+    // Swipes que l'utilisateur a reçus (à ne pas exposer à l'utilisateur !)
+    public function swipesReceived()
+    {
+        return $this->hasMany(Swipe::class, 'swiped_user_id');
+    }
+
+    // Matchs où l'utilisateur est user1
+    public function matchesAsUser1()
+    {
+        return $this->hasMany(UserMatch::class, 'user1_id');
+    }
+
+    // Matchs où l'utilisateur est user2
+    public function matchesAsUser2()
+    {
+        return $this->hasMany(UserMatch::class, 'user2_id');
+    }
+
+    // Tous les matchs (fusion des deux relations)
+    public function matches()
+    {
+        return $this->matchesAsUser1->merge($this->matchesAsUser2);
+    }
 }
+

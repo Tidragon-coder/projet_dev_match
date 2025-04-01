@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SwipeController;
  
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ Route::post('/users/login', [UserController::class, 'login'])->name('api.login')
 Route::get('/users/profile', [UserController::class, 'profile'])->middleware('auth:sanctum')->name('api.profile');
 Route::post('/users/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::put('/users/{id}', [UserController::class, 'update']);
+Route::middleware('auth:sanctum')->post('/swipe', [SwipeController::class, 'store']);
