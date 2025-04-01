@@ -101,7 +101,7 @@ input[type="file"] {
     display: none;
 }
 
-    </style>
+</style>
 
 <body>
     <div class="container mt-5">
