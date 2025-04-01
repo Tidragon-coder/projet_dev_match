@@ -1,4 +1,107 @@
+<style>
+    body {
+    background-color: #080808;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #111;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 200, 72, 0.1);
+}
+
+h2 {
+    color: #FFC848;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    color: #FFC848;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.form-control:focus {
+    outline: none;
+    border: 2px solid #FFC848;
+}
+
+.btn-primary {
+    background-color: #FFC848;
+    color: #080808;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e6b838;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    color: #FFC848;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.label-file {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border: 2px dashed #FFC848;
+    transition: background-color 0.3s ease;
+}
+
+.label-file:hover {
+    background-color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+    </style>
 
 <body>
     <div class="container mt-5">

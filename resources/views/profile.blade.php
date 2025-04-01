@@ -4,239 +4,562 @@
 
 @section('content')
 
-<!-- Section Navbar et Logo -->
-<div class="nav-register-login">
-    <img class="logo1" src="images/logo.png" alt="Logo" width="100px">
+<style>
+    body {
+        background-color: #080808;
+        color: #fff;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .nav-register {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .logo1 {
+        width: 100px;
+    }
+
+    .container_logout_match {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 30px 0;
+
+
+}
+
+
+    .logout_btn_container button {
+        background-color: #FFC848;
+        color: #080808;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    
+    }
+
+    .logout_btn_container button:hover {
+        background-color: #e6b838;
+    }
+
+    .container_infos {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .welcome_profile {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .welcome_profile_espace {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .last_connexion {
+        font-size: 14px;
+        color: #aaa;
+    }
+
+    .infos_container {
+        background-color: #111;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(255, 200, 72, 0.2);
+        margin-bottom: 30px;
+    }
+
+    .title_infos_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .title_infos_container h2 {
+        margin: 0;
+        font-size: 22px;
+        color: #FFC848;
+    }
+
+    .title_infos_container button {
+        background-color: transparent;
+        color: #FFC848;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .all_infos_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+    margin-right: 25px;
+}
+
+.info_user {
+    flex: 0 1 calc(50% - 10px);
+    display: flex;
+    align-items: flex-start;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 150px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.info_user i {
+    margin-right: 10px;
+    color: #FFC848;
+    flex-shrink: 0;
+}
+
+.info {
+    margin: 0;
+    font-size: 16px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    flex: 1;
+}
+
+.info_user_picture {
+    flex: 0 1 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+    .info_user_picture img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #FFC848;
+    }
+
+
+
+    .info {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .info_user {
+            flex: 1 1 100%;
+        }
+    }
+
+    .container-btn-match {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .container-btn-match button {
+        background-color: #FFC848;
+        color: #080808;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .container-btn-match button:hover {
+        background-color: #e6b838;
+    }
+
+    .container_projet {
+        background-color: #111;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(255, 200, 72, 0.2);
+        margin-bottom: 30px;
+    }
+
+    .title_add_projet {
+        font-size: 22px;
+        color: #FFC848;
+        margin-bottom: 20px;
+    }
+
+    .form-label-projet {
+        display: block;
+        margin-bottom: 6px;
+        color: #FFC848;
+        font-weight: bold;
+    }
+
+    .form-control-projet {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #222;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .form-control-projet:focus {
+        outline: none;
+        border: 2px solid #FFC848;
+    }
+
+    .btn-primary-projet {
+        background-color: #FFC848;
+        color: #080808;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary-projet:hover {
+        background-color: #e6b838;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .col-md-4 {
+        flex: 1 1 calc(33.333% - 20px);
+    }
+
+    .card_projet {
+        background-color: #222;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(255, 200, 72, 0.2);
+    }
+
+    .card_projet img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-text {
+        font-size: 14px;
+        color: #ddd;
+        margin-bottom: 15px;
+    }
+
+    .btn-danger {
+        background-color: #ff4c4c;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        background-color: #e04343;
+    }
+
+    @media screen and (max-width: 600px) {
+    .all_infos_container {
+        gap: 10px;
+    }
+
+    .info_user {
+        flex: 1 1 48%;
+    }
+
+    .info_user_picture {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+}
+.container_projet {
+    background-color: #656463;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 200, 72, 0.1);
+    margin-bottom: 40px;
+}
+
+.title_add_projet {
+    font-size: 22px;
+    color: #FFC848;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-label-projet {
+    color: #FFC848;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control-projet {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.form-control-projet:focus {
+    outline: none;
+    border: 2px solid #FFC848;
+}
+
+.btn-primary-projet {
+    background-color: #FFC848;
+    color: #080808;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary-projet:hover {
+    background-color: #e6b838;
+}
+
+.card_projet {
+    background-color: #222;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 200, 72, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.card_projet:hover {
+    transform: scale(1.02);
+}
+
+.card_projet img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #333;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.btn-danger {
+    background-color: transparent;
+    border: 1px solid #ff4c4c;
+    color: #ff4c4c;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #ff4c4c;
+    color: white;
+}
+
+.custom-separator {
+    border: none;
+    border-top: 2px solid #FFC848;
+    margin: 40px 0;
+    width: 100%;
+    margin-right: 20px;
+}
+
+</style>
+
+@section('content')
+<div class="nav-register">
+    <img class="logo1" src="images/logo.png" alt="Logo">
 </div>
 
-<!-- Section Déconnexion -->
-<div class="logout_btn_container">
-    <form method="POST" action="{{ route('logout') }}">
+<div class="container_logout_match">
+    <a href="{{ route('match') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
+        <i class="fa-solid fa-fire-flame-curved"></i> Matcher 
+    </a>
+
+    <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
         @csrf
-        <button type="submit">
+        <button type="submit" style="background: none; color: #ff4c4c; border: none; font-weight: bold; font-size: 16px; cursor: pointer;">
             <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
         </button>
     </form>
 </div>
 
-<!-- Section Bienvenue et Informations de Connexion -->
-<div class="container_infos">
-    <div class="container_welcome">
-        <h2 class="welcome_profile">👋  Bienvenue, {{ auth()->user()->name }} !</h2>
+
+    <!-- Infos de bienvenue -->
+    <div class="container_infos">
+        <h2 class="welcome_profile">👋 Bienvenue, {{ auth()->user()->name ?? 'Utilisateur' }} !</h2>
         <h3 class="welcome_profile_espace">Voici votre espace personnel sur MatchWork.</h3>
         <h4 class="last_connexion">
-            Dernière connexion le : {{ \Carbon\Carbon::parse(Auth::user()->last_login_at)->locale('fr')->format('d F Y') }}
+            Dernière connexion le :
+            {{ auth()->user()->last_login_at ? \Carbon\Carbon::parse(auth()->user()->last_login_at)->locale('fr')->isoFormat('D MMMM YYYY') : 'Non renseignée' }}
         </h4>
     </div>
-</div>
 
-<!-- Section Informations Utilisateur -->
-<div class="infos_container">
+    <!-- Bloc d'infos utilisateur -->
+    <div class="infos_container">
         <div class="title_infos_container">
             <h2>MES INFORMATIONS</h2>
-            
-            <form method="PUT" action="{{ route('edit') }}">
-            @csrf
-            
-            <button type="submit"><i class="fa-solid fa-pen-to-square"></i>Modifier</button>
-        </form>
+            <form method="GET" action="{{ route('edit') }}">
+                <button type="submit"><i class="fa-solid fa-pen-to-square"></i> Modifier</button>
+            </form>
         </div>
 
         <div class="all_infos_container">
-
+    <!-- Photo centrée seule -->
     <div class="info_user_picture">
-        @if(auth()->user()->profile_picture)
-            <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Photo de profil">
-        @else
-            <img src="{{ asset('images/default-profile.png') }}" alt="Aucune photo">
-        @endif
+        <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('images/default-profile.png') }}" alt="Photo de profil">
     </div>
 
+    <!-- Infos utilisateur en grille 2 colonnes -->
     <div class="info_user">
         <i class="fa-solid fa-user"></i>
-        <p class="info">{{ auth()->user()->name }}</p>
+        <p class="info">{{ auth()->user()->pseudo ?? 'Non renseigné' }}</p>
     </div>
-
     <div class="info_user">
         <i class="fa-solid fa-envelope"></i>
-        <p class="info">{{ auth()->user()->email }}</p>
+        <p class="info">{{ auth()->user()->email ?? 'Non renseigné' }}</p>
     </div>
 
     <div class="info_user">
     <i class="fa-solid fa-cake-candles"></i>
-    <p class="info" id="user-age">{{ auth()->user()->date_naissance }}</p>
-
-    <p class="info" id="birthday-message"></p>
+    <p class="info">
+        @if(auth()->user()->date_naissance)
+            {{ \Carbon\Carbon::parse(auth()->user()->date_naissance)->age }} ans
+        @else
+            Non renseigné
+        @endif
+    </p>
 </div>
 
-
-
+<div class="info_user">
+    <i class="fa-solid fa-briefcase"></i>
+    <p class="info">
+        @if(auth()->user()->date_naissance && auth()->user()->year_experience)
+            {{ auth()->user()->year_experience }} années d'expérience
+        @elseif(auth()->user()->date_naissance && !auth()->user()->year_experience)
+            Années d'expérience non renseignées
+        @else
+            Non renseignée
+        @endif
+    </p>
+</div>
 
     <div class="info_user">
         <i class="fa-solid fa-fingerprint"></i>
-        <p class="info">{{ ucfirst(auth()->user()->sexe) }}</p>
-    </div>
-
-    <div class="info_user">
-        <i class="fa-solid fa-briefcase"></i>
-        <p class="info">{{ auth()->user()->year_experience }} ans d'expérience</p>
+        <p class="info">{{ ucfirst(auth()->user()->sexe) ?? 'Non renseigné' }}</p>
     </div>
 
     <div class="info_user">
         <i class="fa-solid fa-file-lines"></i>
-        <p class="info">
-            {{ auth()->user()->biography ?? 'Non renseignée' }}
-        </p>
+        <p class="info">{{ auth()->user()->biography ?? 'Non renseignée' }}</p>
     </div>
 
     <div class="info_user">
         <i class="fa-solid fa-graduation-cap"></i>
-        <p class="info">Spécialité : {{ auth()->user()->speciality }}</p>
+        <p class="info">{{ auth()->user()->speciality ?? 'Non renseignée' }}</p>
     </div>
-
     <div class="info_user">
         <i class="fa-solid fa-location-dot"></i>
-        <p class="info">Localisation : {{ auth()->user()->localisation }}</p>
+        <p class="info">{{ auth()->user()->localisation ?? 'Non renseignée' }}</p>
     </div>
 
     <div class="info_user">
         <i class="fa-solid fa-heart"></i>
-        <p class="info">Centres d'intérêt : {{ auth()->user()->center_interest }}</p>
+        <p class="info">{{ auth()->user()->center_interest ?? 'Non renseignés' }}</p>
     </div>
-
     <div class="info_user">
         <i class="fa-solid fa-phone"></i>
-        <p class="info">Téléphone : {{ auth()->user()->phone_number }}</p>
+        <p class="info">{{ auth()->user()->phone_number ?? 'Non renseigné' }}</p>
     </div>
-
 </div>
 
-    </div>
+<!-- Séparateur -->
+<hr class="custom-separator">
 
-    <!-- <div class="profile-container"> -->
-        <!-- Photo de profil -->
-        <!-- @if(auth()->user()->profile_picture)
-            <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Photo de profil">
-        @else
-            <img src="{{ asset('images/default-profile.png') }}" alt="Aucune photo">
-        @endif -->
-
-        
-        <!-- Informations utilisateur -->
-        <!-- <h2>{{ auth()->user()->name }}</h2>
-        <p class="info"><strong>Nom d'utilisateur :</strong> {{ auth()->user()->pseudo }}</p>
-        <p class="info"><strong>Email :</strong> {{ auth()->user()->email }}</p>
-        <p class="info"><strong>Âge :</strong> {{ auth()->user()->age }} ans</p>
-        <p class="info"><strong>Sexe :</strong> {{ auth()->user()->sexe }}</p>
-        <p class="info"><strong>Spécialité :</strong> {{ auth()->user()->speciality }}</p>
-        <p class="info"><strong>Année(s) d'expérience :</strong> {{ auth()->user()->year_experience }}</p> -->
-
-        <!-- Biographie si elle existe -->
-        <!-- @if(auth()->user()->biography)
-            <p class="info"><strong>Biographie :</strong> {{ auth()->user()->biography }}</p>
-        @else
-            <p class="info"><strong>Biographie :</strong> Non renseignée</p>
-        @endif -->
-
-        <!-- Bouton de déconnexion -->
-        <!-- <form method="POST" action="{{ route('logout') }}">
+    <!-- Ajouter un projet -->
+    <div class="container_projet">
+        <h2 class="title_add_projet">Ajouter un Projet</h2>
+        <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <button type="submit">Se déconnecter</button>
+            <label class="form-label-projet" for="photo">Photo du projet</label>
+            <input type="file" class="form-control-projet" name="photo" id="photo" required>
+
+            <label class="form-label-projet" for="description">Description</label>
+            <textarea class="form-control-projet" name="description" id="description"></textarea>
+
+            <button type="submit" class="btn-primary-projet">Ajouter un projet</button>
         </form>
-        <form method="PUT" action="{{ route('edit') }}">
-            @csrf
-            <button type="submit"><i class="fa-solid fa-pen-to-square"></i> Modifier</button>
-        </form>
-    </div> -->
-
-    <div class="all_infos_container">
-        <!-- Photo de Profil -->
-        <div class="info_user_picture">
-            @if(auth()->user()->profile_picture)
-                <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Photo de profil">
-            @else
-                <img src="{{ asset('images/default-profile.png') }}" alt="Aucune photo">
-            @endif
-        </div>
-
-        <!-- Informations Utilisateur -->
-        <div class="info_user">
-            <i class="fa-solid fa-user"></i>
-            <p class="info">{{ auth()->user()->pseudo }}</p>
-        </div>
-
-        <div class="info_user">
-            <i class="fa-solid fa-envelope"></i>
-            <p class="info">{{ auth()->user()->email }}</p>
-        </div>
-
-        <div class="info_user">
-            <i class="fa-solid fa-cake-candles"></i>
-            <p class="info">{{ auth()->user()->age }} ans</p>
-        </div>
-
-        <div class="info_user">
-            <i class="fa-solid fa-fingerprint"></i>
-            <p class="info">{{ auth()->user()->sexe }}</p>
-        </div>
-
-        <div class="info_user">
-            <i class="fa-solid fa-briefcase"></i>
-            <p class="info">{{ auth()->user()->year_experience }} ans</p>
-        </div>
-
-        <div class="info_user">
-            <i class="fa-solid fa-file-lines"></i>
-            @if(auth()->user()->biography)
-                <p class="info">{{ auth()->user()->biography }}</p>
-            @else
-                <p class="info">Non renseignée</p>
-            @endif
-        </div>
     </div>
-</div>
 
-<!-- Section Accès au Match -->
-<div class="container-btn-match">
-    <form method="GET" action="{{ route('match') }}">
-        <button type="submit">Accéder au match</button>
-    </form>
-</div>
-
-<!-- Section Ajout de Projet -->
-<div class="container_projet">
-    <h2 class="title_add_projet">Ajouter un Projet</h2>
-    <form action="{{ route('projets.store') }}" method="POST" enctype="multipart/form-data" class="mb-4">
-        @csrf
-        <div class="container_add_projet">
-            <label for="photo" class="form-label-projet">Photo du projet</label>
-            <input type="file" class="form-control-projet" id="photo" name="photo" required>
-        </div>
-        <div class="container_add_description_projet">
-            <label for="description" class="form-label-projet">Description</label>
-            <textarea class="form-control-projet" id="description" name="description"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary-projet">Ajouter Projet</button>
-    </form>
-</div>
-
-<!-- Section Liste des Projets -->
-<div class="row">
-    @foreach($projets as $projet)
-        <div class="col-md-4 mb-4">
-            <div class="card_projet">
-                <img src="{{ asset('storage/' . $projet->photo) }}" class="card-img-top" alt="Projet">
-                <div class="card-body">
-                    <p class="card-text">{{ $projet->description }}</p>
-                    <form action="{{ route('projets.destroy', $projet->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                    </form>
+    <!-- Projets existants -->
+    <div class="row">
+        @foreach($projets as $projet)
+            <div class="col-md-4">
+                <div class="card_projet">
+                    <img src="{{ asset('storage/' . $projet->photo) }}" class="card-img-top" alt="Projet">
+                    <div class="card-body">
+                        <p class="card-text">{{ $projet->description }}</p>
+                        <form action="{{ route('projets.destroy', $projet->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </div>
-
 @endsection
