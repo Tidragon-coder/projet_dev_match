@@ -15,6 +15,13 @@
     <p>Spécialité : {{ $user->speciality }}</p>
     <p>Biographie : {{ $user->biography }}</p>
 
+    <!-- Afficher le message si il est passé via la session -->
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('swipe.store') }}">
         @csrf
         <input type="hidden" name="swiped_user_id" value="{{ $user->id }}">
