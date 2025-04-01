@@ -23,13 +23,16 @@ class User extends Authenticatable
         'pseudo',
         'email',
         'password',
-        'speciality',
+        'date_naissance',
         'sexe',
-        'age',
-        'projet_id',
-        'biography',
-        'year_experience',
         'profile_picture',
+        'biography',
+        'speciality',
+        'localisation',
+        'center_interest',
+        'phone_number',
+        'projets_id',
+        'year_experience',
     ];
 
     /**

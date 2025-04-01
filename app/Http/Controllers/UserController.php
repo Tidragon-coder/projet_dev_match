@@ -130,13 +130,18 @@ class UserController extends Controller
                 'pseudo' => 'required|string|max:255|unique:users,pseudo,' . auth()->id(),
                 'email' => 'required|email|unique:users,email,' . auth()->id(),
                 'password' => 'nullable|string|min:4',
-                'age' => 'required|integer',
+                'date_naissance' => 'required|date',
                 'sexe' => 'required|string|max:10',
                 'speciality' => 'required|string|max:100',
-                'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+                'localisation' => 'required|string|max:255',
                 'biography' => 'nullable|string',
+                'center_interest' => 'nullable|string|max:255',
+                'phone_number' => 'nullable|numeric', // Remplace "numeric" par "integer" si nécessaire
                 'year_experience' => 'nullable|integer',
+                'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             ]);
+            
+            
 
             // Gestion du mot de passe (ne pas le mettre à jour s'il est vide)
             if ($request->filled('password')) {

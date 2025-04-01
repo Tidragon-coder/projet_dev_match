@@ -7,13 +7,14 @@
 </head>
 <body>
 
-    <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="photo de {{ $user->name }}" max-width="20%">
-    <h2>Profil de {{ $user->name }}</h2>
-    <p>Pseudo : {{ $user->pseudo }}</p>
-    <p>Âge : {{ $user->age }}</p>
+    <!-- <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="photo de {{ $user->name }}" max-width="20%"> -->
+    <h2>Profil de {{ $user->pseudo }}</h2>
+    <p>{{ $user->sexe }}</p>
+    <p>Prenom : {{ $user->name }}</p>
+    <p>Année d'expérience : {{ $user->year_experience }}</p>
+    <p>Âge : {{ \Carbon\Carbon::parse($user->date_naissance)->age }} ans</p>
     <p>Spécialité : {{ $user->speciality }}</p>
     <p>Biographie : {{ $user->biography }}</p> 
-    <p>Sexe : {{ $user->sexe }}</p>
 
     <form method="GET" action="{{ route('match') }}">
         @csrf
