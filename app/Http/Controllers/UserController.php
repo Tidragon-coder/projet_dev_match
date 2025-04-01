@@ -66,8 +66,6 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage())->withInput();
         }
     }
-    
-
 
     public function login(Request $request)
     {
@@ -93,7 +91,6 @@ class UserController extends Controller
                     'token' => $token
                 ], 200);
             }
-
             
             return redirect()->route('profile');
         }
