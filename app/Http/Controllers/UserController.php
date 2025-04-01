@@ -84,13 +84,13 @@ class UserController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
 
             // Vérifier si la requête est AJAX ou API
-            if ($request->expectsJson()) {
+            // if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'User logged in successfully',
                     'user' => $user,
                     'token' => $token
                 ], 200);
-            }
+            // }
             
             return redirect()->route('profile');
         }
@@ -182,7 +182,14 @@ class UserController extends Controller
 
     public function randomProfile()
     {
-        $user = \App\Models\User::inRandomOrder()->first();
+        // Récupérer l'utilisateur actuellement connecté
+        $userConnected = auth()->user();
+    
+        // Récupérer un utilisateur aléatoire, en excluant l'utilisateur connecté
+        $user = \App\Models\User::where('id', '!=', $userConnected->id)
+                                ->inRandomOrder()
+                                ->first();
+    
         return view('match', ['user' => $user]);
     }
 }

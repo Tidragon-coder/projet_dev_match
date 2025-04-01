@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\SwipeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +13,11 @@ Route::get('/register', [UserController::class, 'showRegister'])->name('register
 Route::post('/register', [UserController::class, 'register'])->name('register.submit');
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.submit');
+
+//systeme de swipe
+Route::post('/swipe', [SwipeController::class, 'store'])->name('swipe.store');
+Route::get('/next-profile', [SwipeController::class, 'showNextProfile'])->name('next.profile');
+
 
 Route::middleware('auth')->group(function() {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
