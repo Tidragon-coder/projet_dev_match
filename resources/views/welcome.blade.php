@@ -2,8 +2,140 @@
 
 @section('title', 'Inscription')
 
+<style>
+body {
+  background-color: #080808;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 480px;
+  margin: auto;
+}
+
+.logo1 {
+  display: block;
+  margin: 20px auto;
+}
+
+h2 {
+  color: #FFC848;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.text_welcome,
+.text_welcome1 {
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.container_form {
+  background-color: #111;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 200, 72, 0.2);
+}
+
+.container_label {
+  margin-bottom: 15px;
+}
+
+label.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #FFC848;
+  font-weight: bold;
+}
+
+input.form-control,
+select.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #222;
+  color: white;
+}
+
+input.form-control:focus,
+select.form-control:focus {
+  outline: none;
+  border: 2px solid #FFC848;
+}
+
+.btn-validation {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #FFC848;
+  color: #080808;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #e6b838;
+}
+
+.container_login {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.container_login a {
+  color: #FFC848;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container_profile-pic-logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.container_profile-pic-logo .logo {
+  width: 60px;
+  height: auto;
+}
+
+.text_data {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #777;
+  text-align: center;
+}
+
+.nav-register {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  margin-top: 50px;
+}   
+</style>
 @section('content')
-<div class="nav-register-login">
+<div class="nav-register">
     <img class="logo1" src="images/logo.png" alt="" width="100px">
     
 
