@@ -424,3 +424,146 @@ form {
     object-fit: cover; /* Assure que l'image couvre bien l'espace sans être déformée */
     border-radius: 50%; /* Garde l'effet cercle même si l'image a un fond transparent */
 }
+
+.container_projet {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre d'ajout de projet */
+.title_add_projet {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Conteneur de formulaire */
+.container_add_projet,
+.container_add_description_projet {
+    margin-bottom: 15px;
+}
+
+/* Label */
+.form-label-projet {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Styles des champs du formulaire */
+.form-control-projet {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-control-projet:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Style du bouton Upload d'image */
+.form-control-projet[type="file"] {
+    background-color: transparent;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-control-projet[type="file"]:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Bouton de soumission */
+.btn-primary-projet[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.btn-danger[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Section Liste des Projets */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.col-md-4 {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+.card_projet {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card_projet:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Style du bouton Supprimer dans la carte projet */
+.card-body .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-body .btn-danger:hover {
+    background-color: #c82333;
+}
