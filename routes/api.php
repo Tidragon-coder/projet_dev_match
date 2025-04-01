@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjetController;
  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SwipeController;
  
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 //route projets
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/projets', [ProjetController::class, 'store']); // Ajouter un projet
+    Route::post('/swipe', [SwipeController::class, 'store']); // Ajouter un projet
     Route::get('/projets', [ProjetController::class, 'index']);  // Voir tous les projets
     Route::delete('/projets/{projet}', [ProjetController::class, 'destroy']); // Supprimer un projet
 });
