@@ -1,29 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Match</title>
-    <style>
-        /* Style pour l'alerte */
-        .alert {
-            background-color: #f9c74f;
-            padding: 10px;
-            color: #4f4f4f;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h2>Profil de {{ $user->pseudo }}</h2>
-    <p>{{ $user->sexe }}</p>
+@section('title', 'match')
+
+@section('content')
+
+<!-- Section Navbar et Logo -->
+<div class="nav-register-login">
+    <img class="logo1" src="images/logo.png" alt="Logo" width="100px">
+</div>
+<div class="container_profile_match">
+    <h2 class="title_page_match">A vos matchs, prêts, partez !</h2>
+    <div class="container_picture_profile_match">
+        <div class="container_infos_profile_match">{{ $user->name }}</div>
+        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="aucune photo de profil de {{ $user->name }}" class="profile-image">
+    </div>
+</div>
+   
+
+
+
+    <!-- <h2>Profil de {{ $user->pseudo }}</h2> -->
+    
+    <!-- <p>{{ $user->sexe }}</p>
     <p>Prenom : {{ $user->name }}</p>
     <p>Année d'expérience : {{ $user->year_experience }}</p>
     <p>Âge : {{ \Carbon\Carbon::parse($user->date_naissance)->age }} ans</p>
     <p>Spécialité : {{ $user->speciality }}</p>
-    <p>Biographie : {{ $user->biography }}</p>
+    <p>Biographie : {{ $user->biography }}</p> -->
 
     <!-- Afficher le message si il est passé via la session -->
     @if(session('message'))
@@ -34,9 +37,9 @@
 
     <form method="POST" action="{{ route('swipe.store') }}">
         @csrf
-        <input type="hidden" name="swiped_user_id" value="{{ $user->id }}">
-        <button type="submit" name="direction" value="match">Match</button>
-        <button type="submit" name="direction" value="pass">Pass</button>
+        <input class="swiped_user_id" type="hidden" name="swiped_user_id" value="{{ $user->id }}">
+        <button class="match-btn" type="submit" name="direction" value="match">Match</button>
+        <button class="pass-btn" type="submit" name="direction" value="pass">Pass</button>
     </form>
 
     <form method="GET" action="{{ route('profile') }}">
