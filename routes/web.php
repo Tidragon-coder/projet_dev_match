@@ -13,9 +13,6 @@ Route::post('/register', [UserController::class, 'register'])->name('register.su
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.submit');
 
-
-
-
 Route::middleware('auth')->group(function() {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/logout', [UserController::class, 'webLogout'])->name('logout');

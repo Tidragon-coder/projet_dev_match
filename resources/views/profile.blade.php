@@ -64,51 +64,11 @@
 
     <div class="info_user">
     <i class="fa-solid fa-cake-candles"></i>
-    <p class="info" id="user-age"></p>
+    <p class="info" id="user-age">{{ auth()->user()->date_naissance }}</p>
+
     <p class="info" id="birthday-message"></p>
 </div>
 
-<script>
-    const birthDate = "{{ $user->date_naissance }}";
-
-    function calculateAge(birthDate) {
-        const birthDateObj = new Date(birthDate);
-        const today = new Date();
-        let age = today.getFullYear() - birthDateObj.getFullYear();
-        const month = today.getMonth();
-        const day = today.getDate();
-
-        if (month < birthDateObj.getMonth() || (month === birthDateObj.getMonth() && day < birthDateObj.getDate())) {
-            age--;
-        }
-
-        return age;
-    }
-
-    function daysUntilBirthday(birthDate) {
-        const today = new Date();
-        const birthDateObj = new Date(birthDate);
-        birthDateObj.setFullYear(today.getFullYear());
-
-        if (birthDateObj < today) {
-            birthDateObj.setFullYear(today.getFullYear() + 1);
-        }
-
-        const diffTime = birthDateObj - today;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        return diffDays;
-    }
-
-    document.getElementById('user-age').textContent = calculateAge(birthDate) + " ans";
-
-    const daysLeft = daysUntilBirthday(birthDate);
-    const birthdayMessage = daysLeft === 0 
-        ? "C'est aujourd'hui votre anniversaire !" 
-        : `Votre anniversaire est dans ${daysLeft} jour${daysLeft > 1 ? 's' : ''}.`;
-
-    document.getElementById('birthday-message').textContent = birthdayMessage;
-</script>
 
 
 

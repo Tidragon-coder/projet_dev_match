@@ -92,9 +92,9 @@ class ProjetController extends Controller
 
 
     public function indexView()
-{
-    $projets = Projet::where('user_id', auth()->id())->get(); // Récupérer uniquement les projets de l'utilisateur connecté
-    return view('profile', compact('projets'));
-}
+    {
+        $projets = Projet::where('user_id', auth()->id())->get(); // Récupérer uniquement les projets de l'utilisateur connecté
+        return view('profile', compact('projets'));
+    }
 
 }
