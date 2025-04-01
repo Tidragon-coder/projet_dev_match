@@ -66,8 +66,6 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage())->withInput();
         }
     }
-    
-
 
     public function login(Request $request)
     {
@@ -93,7 +91,6 @@ class UserController extends Controller
                     'token' => $token
                 ], 200);
             }
-
             
             return redirect()->route('profile');
         }
@@ -110,6 +107,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = auth()->user();
+        var_dump($user);
         
         if (!$user) {
             return redirect()->route('login')->with('error', 'You are not logged in');
@@ -133,12 +131,15 @@ class UserController extends Controller
                 'pseudo' => 'required|string|max:255|unique:users,pseudo,' . auth()->id(),
                 'email' => 'required|email|unique:users,email,' . auth()->id(),
                 'password' => 'nullable|string|min:4',
-                'age' => 'required|integer',
+                'date_naissance' => 'required|date',
                 'sexe' => 'required|string|max:10',
                 'speciality' => 'required|string|max:100',
-                'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+                'localisation' => 'required|string|max:255',
                 'biography' => 'nullable|string',
+                'center_interest' => 'nullable|string|max:255',
+                'phone_number' => 'nullable|numeric', // Remplace "numeric" par "integer" si nécessaire
                 'year_experience' => 'nullable|integer',
+                'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             ]);
 
             // Gestion du mot de passe (ne pas le mettre à jour s'il est vide)
@@ -148,16 +149,14 @@ class UserController extends Controller
             unset($validatedData['password']);
             }
 
-    // Gestion de l'upload de l'image
-    if ($request->hasFile('profile_picture')) {
-        $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
-        $validatedData['profile_picture'] = $imagePath;
-    }
-            
+            // Gestion de l'upload de l'image
+            if ($request->hasFile('profile_picture')) {
+                $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+                $validatedData['profile_picture'] = $imagePath;
+            }
         
             // Mise à jour des informations de l'utilisateur
             auth()->user()->update($validatedData);
-
             return redirect()->route('profile')->with('success', 'Profil mis à jour !');   
     }
 
@@ -181,13 +180,9 @@ class UserController extends Controller
         return redirect()->route('welcome')->with('success', 'Logged out successfully');
     }
 
-
     public function randomProfile()
     {
         $user = \App\Models\User::inRandomOrder()->first();
         return view('match', ['user' => $user]);
     }
-
-    
-
 }

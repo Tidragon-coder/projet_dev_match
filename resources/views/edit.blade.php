@@ -29,9 +29,11 @@
             </div>
 
             <div class="mb-3">
-                <label for="age" class="form-label">Âge</label>
-                <input type="number" name="age" id="age" class="form-control" value="{{ old('age', $user->age) }}" required>
+                <label for="date_naissance" class="form-label">Date de naissance</label>
+                <input type="date" name="date_naissance" id="date_naissance" class="form-control" value="{{ old('date_naissance', $user->date_naissance) }}" required>
             </div>
+
+
 
             <div class="mb-3">
                 <label for="sexe" class="form-label">Sexe</label>
@@ -48,8 +50,23 @@
             </div>
 
             <div class="mb-3">
-                <label for="biography" class="form-label">Biographie</label>
-                <textarea name="biography" id="biography" class="form-control">{{ old('biography', $user->biography) }}</textarea>
+                <label for="localisation" class="form-label">localisation</label>
+                <input type="text" name="localisation" id="localisation" class="form-control" value="{{ old('speciality', $user->localisation) }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="biography" class="form-label">Biographie (max 250 caractères)</label>
+                <textarea name="biography" id="biography" class="form-control" maxlength="250" value="{{ old('biography', $user->biography) }}"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="center_interest" class="form-label">Centre d'interet en 3 mots (max 40 caractères)</label>
+                <input type="text" name="center_interest" id="center_interest" class="form-control" maxlength="40" value="{{ old('center_interest', $user->center_interest) }}"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Numéro de téléphone</label>
+                <input type="number" name="phone_number" id="phone_number" class="form-control" value="{{ old('phone_number', $user->phone_number) }}"></textarea>
             </div>
 
             <div class="mb-3">

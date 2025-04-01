@@ -1,6 +1,7 @@
 <?php
  
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProjetController;
  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,11 @@ Route::post('/users/login', [UserController::class, 'login'])->name('api.login')
 Route::get('/users/profile', [UserController::class, 'profile'])->middleware('auth:sanctum')->name('api.profile');
 Route::post('/users/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::put('/users/{id}', [UserController::class, 'update']);
-Route::middleware('auth:sanctum')->post('/swipe', [SwipeController::class, 'store']);
+
+//route projets
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/projets', [ProjetController::class, 'store']); // Ajouter un projet
+    Route::post('/swipe', [SwipeController::class, 'store']); // Ajouter un projet
+    Route::get('/projets', [ProjetController::class, 'index']);  // Voir tous les projets
+    Route::delete('/projets/{projet}', [ProjetController::class, 'destroy']); // Supprimer un projet
+});
