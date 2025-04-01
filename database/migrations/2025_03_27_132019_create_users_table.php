@@ -15,11 +15,14 @@ return new class extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->string('pseudo')->after('name')->nullable();
-            $table->tinyInteger('age')->after('email')->nullable(); // Ajout d'une colonne après 'email'
-            $table->enum('sexe', ['homme', 'femme', 'autre'])->after('age')->nullable(); // Enum avec valeurs
+            $table->date('date_naissance')->after('email')->nullable();
+            $table->enum('sexe', ['homme', 'femme', 'autre'])->after('date_naissance')->nullable(); // Enum avec valeurs
             $table->string('profile_picture')->unique()->nullable()->after('sexe');
             $table->text('biography')->nullable()->after('profile_picture');
             $table->string('speciality')->after('biography');
+            $table->string('localisation')->after('speciality')->nullable();
+            $table->string('center_interest')->after('localisation')->nullable();
+            $table->string('phone_number')->after('center_interest')->nullable();
             $table->bigInteger('projets_id')->unsigned()->nullable()->after('speciality');
             $table->foreign('projets_id')->references('id')->on('projets')->onDelete('cascade'); // Clé étrangère
             $table->tinyInteger('year_experience')->after('projets_id')->nullable();
@@ -34,7 +37,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['age', 'sexe', 'profile_picture', 'biography', 'speciality', 'projets_id', 'year_experience']);
+            $table->dropColumn(['date_naissance', 'sexe', 'profile_picture', 'biography', 'speciality', 'projets_id', 'year_experience']);
         });
     }
 };
