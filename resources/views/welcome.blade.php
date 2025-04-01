@@ -256,7 +256,7 @@ select.form-control:focus {
 
     <div class="container_login">
             <p class="text_login">
-                Vous evez déjà un compte ? 
+                Vous avez déjà un compte ? 
                 <a href="{{ route('login') }}">
                     Se connecter
                 </a>
