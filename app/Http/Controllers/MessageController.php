@@ -29,7 +29,7 @@ class MessageController extends Controller {
         // return response()->json($messages);
 
         if (!$match) {
-            return redirect()->route('dashboard')->with('error', 'Accès refusé.');
+            return redirect()->route('match')->with('error', 'Accès refusé.');
         }
     
         // Récupérer les messages du match
@@ -37,7 +37,7 @@ class MessageController extends Controller {
             ->orderBy('created_at', 'asc')
             ->get();
     
-            return view('message', compact('messages', 'match'));
+            return view('messages.message', compact('messages', 'match'));
     }
 
     // Envoyer un message
@@ -76,5 +76,17 @@ class MessageController extends Controller {
             return response()->json('error', 'Error creating user: ' . $e->getMessage())->withInput();
         }
     }
+
+    public function listConversations()
+{
+    $user = Auth::user();
+
+    // Récupérer tous les matchs de l'utilisateur
+    $matches = UserMatch::where('user1_id', $user->id)
+                        ->orWhere('user2_id', $user->id)
+                        ->get();
+
+    return view('messages.list', compact('matches'));
+}
 }
 

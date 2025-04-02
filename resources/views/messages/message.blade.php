@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Conversation</h2>
+    <h2>Conversation avec {{ $match->user1_id == auth()->id() ? $match->user2->name : $match->user1->name }}</h2>
 
     <div class="messages-box">
         @foreach ($messages as $message)
@@ -45,3 +45,4 @@
     }
 </style>
 @endsection
+

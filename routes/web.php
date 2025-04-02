@@ -36,4 +36,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
+    //list msg
+    Route::get('/messages', [MessageController::class, 'listConversations'])->name('messages.list');
+Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
+
 });
