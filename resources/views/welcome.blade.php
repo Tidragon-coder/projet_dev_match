@@ -213,7 +213,7 @@ select.form-control:focus {
             </div>
 
             <div class="btn-validation" style="text-align: right;">
-                <button type="button" class="btn-secondary" onclick="showStep2()">Suivant</button>
+                <button type="button" class="btn-secondary" onclick="showStep2()">Suivant 1/3</button>
             </div>
         </div>
 
@@ -253,11 +253,26 @@ select.form-control:focus {
             </div>
 
             <div class="btn-validation" style="text-align: space-between;">
-                <button type="button" class="btn-secondary" onclick="showStep1()">Retour</button>
-                
+                <button type="button" class="btn-secondary" onclick="showStep3()">Suivant 2/3</button>
             </div>
-            <button type="submit" class="btn btn-primary" id="submit-btn" disabled>S'inscrire</button>
+            <div class="btn-validation" style="text-align: space-between;">
+                <button type="button" class="btn-secondary" onclick="showStep1()">Retour</button>
+            </div>
+          </div>
 
+        </div>
+
+        <div id="step3" style="display: none;">
+        <label class="block w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-md text-white hover:bg-slate-600 cursor-pointer text-center">
+                <span class="text_choose_img">Choisir une image</span>
+                <input type="file" name="profile_picture" id="profile_picture" accept="image/*" class="hidden">
+            </label>
+
+            <div class="btn-validation" style="text-align: space-between;">
+                <button type="button" class="btn-secondary" onclick="showStep2()">Retour 3/3</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit-btn" disabled>S'inscrire</button>
         </div>
         </form>
     </div>
@@ -274,12 +289,20 @@ select.form-control:focus {
 <script>
 function showStep2() {
     document.getElementById("step1").style.display = "none";
+    document.getElementById("step3").style.display = "none";
     document.getElementById("step2").style.display = "block";
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function showStep1() {
     document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "none";
     document.getElementById("step1").style.display = "block";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function showStep3() {
+  document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "block";
+    document.getElementById("step1").style.display = "none";
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
