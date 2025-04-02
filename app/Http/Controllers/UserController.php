@@ -182,7 +182,29 @@ class UserController extends Controller
 
     public function randomProfile()
     {
-        $user = \App\Models\User::inRandomOrder()->first();
+        $userConnected = auth()->user();
+    
+        // Récupérer l'ID du dernier utilisateur vu (depuis la session)
+        $lastUserId = session('last_seen_user_id', 0);
+    
+        // Récupérer le prochain utilisateur en excluant l'utilisateur connecté
+        $user = \App\Models\User::where('id', '!=', $userConnected->id)
+                                ->where('id', '>', $lastUserId) // Récupérer le suivant
+                                ->orderBy('id', 'asc')
+                                ->first();
+    
+        // Si aucun utilisateur n'est trouvé, recommencer depuis le début
+        if (!$user) {
+            $user = \App\Models\User::where('id', '!=', $userConnected->id)
+                                    ->orderBy('id', 'asc')
+                                    ->first();
+        }
+    
+        // Sauvegarder en session l'ID du dernier utilisateur affiché
+        if ($user) {
+            session(['last_seen_user_id' => $user->id]);
+        }
+    
         return view('match', ['user' => $user]);
     }
 }
