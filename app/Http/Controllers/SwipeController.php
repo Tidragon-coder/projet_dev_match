@@ -7,109 +7,72 @@ use App\Models\Swipe;
 use App\Models\UserMatch;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class SwipeController extends Controller
 {
     public function store(Request $request)
-{
-    $request->validate([
-        'swiped_user_id' => 'required|exists:users,id',
-        'direction' => 'required|in:match,pass',
-    ]);
-
-    $user = Auth::user();
-
-    $todaySwipeCount = Swipe::where('swiper_user_id', $user->id)
-    ->whereDate('created_at', Carbon::today())
-    ->count();
-
-    if ($todaySwipeCount >= 10) {
-        return response()->json([
-            'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
-        ], 403);
-    }
-
-    $targetUserId = $request->swiped_user_id;
-    $direction = $request->direction;
-
-    if ($user->id == $targetUserId) {
-        return response()->json(['message' => 'Impossible de swiper votre propre profil.'], 400);
-    }
-
-    $existingSwipe = Swipe::where('swiper_user_id', $user->id)
-                          ->where('swiped_user_id', $targetUserId)
-                          ->first();
-
-    if ($existingSwipe) {
-        return request()->expectsJson()
-            ? response()->json(['message' => 'Vous avez déjà swipé ce profil.'], 400)
-            : redirect()->route('match')->with('message', 'Vous avez déjà swipé ce profil.');
-    }
-
-    Swipe::create([
-        'swiper_user_id' => $user->id,
-        'swiped_user_id' => $targetUserId,
-        'direction' => $direction,
-    ]);
-
-    if ($direction === 'match') {
-        $reciprocalSwipe = Swipe::where('swiper_user_id', $targetUserId)
-                                ->where('swiped_user_id', $user->id)
-                                ->where('direction', 'match')
-                                ->first();
-
-        if ($reciprocalSwipe) {
-            UserMatch::create([
-                'user1_id' => min($user->id, $targetUserId),
-                'user2_id' => max($user->id, $targetUserId),
-            ]);
-
-            return request()->expectsJson()
-                ? response()->json(['message' => '✨ Match trouvé !'], 200)
-                : redirect()->route('match')->with('message', '✨ Match trouvé !');
-        }
-    }
-
-    return request()->expectsJson()
-        ? response()->json(['message' => 'Swipe enregistré.'], 200)
-        : redirect()->route('match')->with('message', 'Swipe enregistré.');
-}
-
-    
-
-    public function show(User $user)
     {
-        $currentUser = Auth::user();
+        $request->validate([
+            'swiped_user_id' => 'required|exists:users,id',
+            'direction' => 'required|in:match,pass',
+        ]);
     
-        // Vérifier si les deux utilisateurs ont déjà un match
-        $existingMatch = UserMatch::where(function($query) use ($user, $currentUser) {
-            $query->where('user1_id', $currentUser->id)->where('user2_id', $user->id);
-        })->orWhere(function($query) use ($user, $currentUser) {
-            $query->where('user1_id', $user->id)->where('user2_id', $currentUser->id);
-        })->first();
+        $user = Auth::user(); // Utilisateur authentifié
+        $targetUserId = $request->swiped_user_id;
+        $direction = $request->direction;
     
-        return view('match', compact('user', 'existingMatch'));
+        // Empêcher de swiper soi-même
+        if ($user->id == $targetUserId) {
+            return $this->responseHandler($request, 'Impossible de swiper votre propre profil.', 400);
+        }
+    
+        // Vérifier si le swipe existe déjà
+        $existingSwipe = Swipe::where('swiper_user_id', $user->id)
+                              ->where('swiped_user_id', $targetUserId)
+                              ->first();
+    
+        if ($existingSwipe) {
+            return $this->responseHandler($request, 'Vous avez déjà swipé ce profil.', 400);
+        }
+    
+        // Enregistrer le swipe
+        Swipe::create([
+            'swiper_user_id' => $user->id,
+            'swiped_user_id' => $targetUserId,
+            'direction' => $direction,
+        ]);
+    
+        // Vérifier si c'est un match réciproque
+        if ($direction === 'match') {
+            $reciprocalSwipe = Swipe::where('swiper_user_id', $targetUserId)
+                                    ->where('swiped_user_id', $user->id)
+                                    ->where('direction', 'match')
+                                    ->first();
+    
+            if ($reciprocalSwipe) {
+                // Créer le match
+                UserMatch::create([
+                    'user1_id' => min($user->id, $targetUserId),
+                    'user2_id' => max($user->id, $targetUserId),
+                ]);
+    
+                return $this->responseHandler($request, '✨ Match trouvé !');
+            }
+        }
+    
+        return $this->responseHandler($request, 'Swipe enregistré.');
     }
-
-    public function showNextProfile()
-{
-    $user = Auth::user(); // L'utilisateur connecté
-
-    // Récupérer un autre utilisateur à swiper (par exemple, un autre utilisateur qui n'a pas encore été swipé par l'utilisateur courant)
-    // Vous pouvez ajouter plus de conditions si nécessaire (par exemple, exclure les utilisateurs déjà swipés)
-
-    $nextUser = User::whereNotIn('id', function ($query) use ($user) {
-        // Récupérer les utilisateurs que l'utilisateur a déjà swipé
-        $query->select('swiped_user_id')
-              ->from('swipes')
-              ->where('swiper_user_id', $user->id);
-    })->inRandomOrder()->first(); 
-
-    if ($nextUser) {
-        return view('match', ['user' => $nextUser]);
+    
+    /**
+     * Gère la réponse JSON ou redirige vers la vue match.blade.php
+     */
+    private function responseHandler($request, $message, $status = 200)
+    {
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json(['message' => $message], $status);
+        }
+    
+        // Retourner à la vue avec un message flash
+        return redirect()->route('match')->with('message', $message);
     }
-
-    return redirect()->route('noMoreProfiles'); // Rediriger si aucun profil n'est disponible
-}
 }
