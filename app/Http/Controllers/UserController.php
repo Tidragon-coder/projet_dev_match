@@ -88,13 +88,13 @@ class UserController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
 
             // Vérifier si la requête est AJAX ou API
-            if ($request->expectsJson()) {
+            // if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'User logged in successfully',
                     'user' => $user,
                     'token' => $token
                 ], 200);
-            }
+            // }
             
             return redirect()->route('profile');
         }
