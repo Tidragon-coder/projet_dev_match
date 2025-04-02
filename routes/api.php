@@ -31,4 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/swipe', [SwipeController::class, 'store']); // Ajouter un projet
     Route::get('/projets', [ProjetController::class, 'index']);  // Voir tous les projets
     Route::delete('/projets/{projet}', [ProjetController::class, 'destroy']); // Supprimer un projet
+
+    Route::post('/apropos', [ProjetController::class, 'feedback']); // faire un feedback
+    route::get('/apropos', [ProjetController::class, 'swhowapropos']); // Voir la page apropos
 });
