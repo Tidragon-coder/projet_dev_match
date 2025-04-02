@@ -54,7 +54,7 @@ class ProjetController extends Controller
         } else {
             // Si la requête vient d'un formulaire via navigateur, rediriger vers la vue avec les projets
             return redirect()->route('profile')->with([
-                'popupMessage' => 'Projet ajouté avec succès !',
+                'popupMessage' => 'Projet ajouté !',
                 'popupColor' => 'rgb(49, 184, 49)' 
             ]);
         }
