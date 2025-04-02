@@ -20,28 +20,47 @@ class ProjetController extends Controller
      * Store a newly created resource in storage.
      */
     // Ajouter un projet
+
     public function store(Request $request)
     {
-        $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
-        ]);
 
-        $path = $request->file('photo')->store('images', 'public');
-        $projet = Projet::create([
-            'user_id' => auth()->id(),
-            'photo' => $path,
-            'description' => $request->description,
-        ]);
+        $userProjectsCount = Projet::where('user_id', auth()->id())->count();
+        $max_projects = 3;
 
-         // Vérifier si la requête vient du navigateur ou de Postman
-    if ($request->expectsJson()) {
-        // Si la requête attend un JSON (comme dans Postman), retourner la réponse JSON
-        return response()->json($projet, 201);
-    } else {
-        // Si la requête vient d'un formulaire via navigateur, rediriger vers la vue avec les projets
-        return redirect()->route('profile');
-    }
+        if ($userProjectsCount >= $max_projects) {
+            return redirect()->route('profile')->with([
+                'popupMessage' => 'Vous avez atteint la limite de 3 projets ! <br> Débloquez MatchWork Max pour plus de projets !',
+                'popupColor' => '#FF4C4C' 
+            ]);
+        }
+        else   {
+            
+            $request->validate([
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'description' => 'nullable|string',
+            ]);
+    
+            $path = $request->file('photo')->store('images', 'public');
+            $projet = Projet::create([
+                'user_id' => auth()->id(),
+                'photo' => $path,
+                'description' => $request->description,
+            ]);
+    
+             // Vérifier si la requête vient du navigateur ou de Postman
+        if ($request->expectsJson()) {
+            // Si la requête attend un JSON (comme dans Postman), retourner la réponse JSON
+            return response()->json($projet, 201);
+        } else {
+            // Si la requête vient d'un formulaire via navigateur, rediriger vers la vue avec les projets
+            return redirect()->route('profile')->with([
+                'popupMessage' => 'Projet ajouté !',
+                'popupColor' => 'rgb(49, 184, 49)' 
+            ]);
+        }
+        }
+
+        
 
     }
 
@@ -86,7 +105,10 @@ class ProjetController extends Controller
         }
     
         // Sinon, rediriger l'utilisateur vers sa page de profil
-        return redirect()->route('profile')->with('message', 'Projet supprimé');
+        return redirect()->route('profile')->with([
+            'popupMessage' => 'Projet supprimé !',
+            'popupColor' => 'rgb(243, 156, 34)' 
+        ]);
     }
     
 
