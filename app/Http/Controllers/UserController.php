@@ -17,10 +17,12 @@ class UserController extends Controller
                 'pseudo' => 'required|string|max:255|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:4',
-                'age'=> 'nullable|int',
-                'sexe'=> 'nullable',
+                'date_naissance'=> 'required|date',
+                'localisation'=> 'required|string',
+                'year_experience'=> 'required|integer',
+                'sexe'=> 'required',
                 'speciality'=> 'required|string',
-                'profile_picture'=> 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'profile_picture'=> 'required|image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
              // Gestion de l'upload de l'image de profil
@@ -38,8 +40,10 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
                 'speciality' => $request->speciality,
                 'sexe' => $request->sexe,
-                'age' => $request->age,
+                'date_naissance' => $request->date_naissance,
                 'profile_picture' => $imagePath,
+                'localisation' => $request->localisation,
+                'year_experience' => $request->year_experience
             ]);
     
             // Connexion automatique de l'utilisateur
