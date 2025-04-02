@@ -25,16 +25,21 @@ class SwipeController extends Controller
     ->count();
 
     if ($todaySwipeCount >= 10) {
-        return response()->json([
-            'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
-        ], 403);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
+            ], 403);
+        }
+    
+        return redirect()->route('match')->with('popupMessage', 'Vous avez atteint la limite de 10 swipes. Réessayez dans 2 minutes.');
     }
+    
 
     $targetUserId = $request->swiped_user_id;
     $direction = $request->direction;
 
     if ($user->id == $targetUserId) {
-        return response()->json(['message' => 'Impossible de swiper votre propre profil.'], 400);
+        return redirect()->route('match')->with('popupMessage', 'Vous avez atteint la limite de swipes. Réessayez dans 2 minutes.');
     }
 
     $existingSwipe = Swipe::where('swiper_user_id', $user->id)
