@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Projet;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProjetController extends Controller
+class feedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,24 @@ class ProjetController extends Controller
         return Projet::with('user')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // Ajouter un projet
+    public function feedback(request $request){
+       
+        // Valider les données
+        $request->validate([
+            'feedback' => 'required|string|max:1000',
+        ]);
 
+        // Créer le feedback
+        Feedback::create([
+            'user_id'=> auth()->id(), 
+            'feedback' => $request->input('feedback'),
+        ]);
+
+        // Redirection avec message de succès
+        return response()->json([
+            'message' => 'Feedback enregistré avec succès.',
+        ], 201);
+    }
     
 
 }

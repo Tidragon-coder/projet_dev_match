@@ -2,6 +2,8 @@
  
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\FeedbackController;
+
  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/projets', [ProjetController::class, 'index']);  // Voir tous les projets
     Route::delete('/projets/{projet}', [ProjetController::class, 'destroy']); // Supprimer un projet
 
-    Route::post('/apropos', [ProjetController::class, 'feedback']); // faire un feedback
-    route::get('/apropos', [ProjetController::class, 'swhowapropos']); // Voir la page apropos
+    Route::post('/apropos', [FeedbackController::class, 'feedback']); // faire un feedback
+    Route::get('/apropos', [FeedbackController::class, 'swhowapropos']); // Voir la page apropos
 });
