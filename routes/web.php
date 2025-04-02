@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\SwipeController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,5 +31,13 @@ Route::middleware('auth')->group(function() {
     Route::get('/profile', [ProjetController::class, 'indexView'])->name('profile');
     Route::post('/projets', [ProjetController::class, 'store'])->name('projets.store');
     Route::delete('/projets/{id}', [ProjetController::class, 'destroy'])->name('projets.destroy');
+
+    //route msg
+    Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+
+    //list msg
+    Route::get('/messages', [MessageController::class, 'listConversations'])->name('messages.list');
+Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
 
 });
