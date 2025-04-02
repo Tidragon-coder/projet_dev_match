@@ -20,13 +20,24 @@ class MessageController extends Controller {
                       ->orWhere('user2_id', $user->id);
             })->first();
 
+        // if (!$match) {
+        //     return response()->json(['message' => 'Accès refusé'], 403);
+        // }
+
+        // $messages = Message::where('match_id', $match_id)->orderBy('created_at')->get();
+
+        // return response()->json($messages);
+
         if (!$match) {
-            return response()->json(['message' => 'Accès refusé'], 403);
+            return redirect()->route('dashboard')->with('error', 'Accès refusé.');
         }
-
-        $messages = Message::where('match_id', $match_id)->orderBy('created_at')->get();
-
-        return response()->json($messages);
+    
+        // Récupérer les messages du match
+        $messages = Message::where('match_id', $match_id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    
+            return view('message', compact('messages', 'match'));
     }
 
     // Envoyer un message
