@@ -7,6 +7,7 @@ use App\Models\Swipe;
 use App\Models\UserMatch;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class SwipeController extends Controller
 {
@@ -18,6 +19,17 @@ class SwipeController extends Controller
     ]);
 
     $user = Auth::user();
+
+    $todaySwipeCount = Swipe::where('swiper_user_id', $user->id)
+    ->whereDate('created_at', Carbon::today())
+    ->count();
+
+    if ($todaySwipeCount >= 10) {
+        return response()->json([
+            'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
+        ], 403);
+    }
+
     $targetUserId = $request->swiped_user_id;
     $direction = $request->direction;
 
