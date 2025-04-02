@@ -41,41 +41,47 @@ class MessageController extends Controller {
     }
 
     // Envoyer un message
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         try {
-
             $request->validate([
                 'match_id' => 'required|exists:matches,id',
                 'content' => 'required|string',
             ]);
-
+    
             $user = Auth::user();
             $match = UserMatch::where('id', $request->match_id)
-                ->where(function($query) use ($user) {
+                ->where(function ($query) use ($user) {
                     $query->where('user1_id', $user->id)
-                        ->orWhere('user2_id', $user->id);
+                          ->orWhere('user2_id', $user->id);
                 })->first();
-
+    
             if (!$match) {
                 return response()->json(['message' => 'Accès refusé'], 403);
             }
-
+    
             $message = Message::create([
                 'match_id' => $request->match_id,
                 'sender_id' => $user->id,
                 'content' => $request->content,
             ]);
-
-            return response()->json(['message' => 'Message envoyé', 'data' => $message], 201);
+    
+            // ✅ Si c'est une requête AJAX / API -> Retour JSON
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Message envoyé', 'data' => $message], 201);
+            }
+    
+            // ✅ Sinon, on redirige vers la page de la conversation
+            return redirect()->route('messages.index', ['match_id' => $request->match_id])
+                             ->with('success', 'Message envoyé avec succès !');
     
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Gestion des erreurs de validation
-            return response()->json('error', 'Error creating user: ' . $e->getMessage())->withInput();
+            return back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            // Gestion des erreurs générales
-            return response()->json('error', 'Error creating user: ' . $e->getMessage())->withInput();
+            return back()->with('error', 'Une erreur est survenue : ' . $e->getMessage())->withInput();
         }
     }
+    
 
     public function listConversations()
 {

@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <h2>Conversation avec {{ $match->user1_id == auth()->id() ? $match->user2->name : $match->user1->name }}</h2>
+@section('title', 'match')
 
+@section('content')
+<div class="nav-register-login">
+    <img class="logo1" src="../images/logo.png" alt="Logo" width="100px">
+</div>
+<div class="container">
+    <h2 class="title_messagerie">Conversation avec {{ $match->user1_id == auth()->id() ? $match->user2->name : $match->user1->name }}</h2>
+    
     <div class="messages-box">
         @foreach ($messages as $message)
             <div class="message {{ $message->sender_id == auth()->id() ? 'sent' : 'received' }}">
@@ -16,33 +21,17 @@
     <form action="{{ route('messages.store') }}" method="POST">
         @csrf
         <input type="hidden" name="match_id" value="{{ $match->id }}">
-        <textarea name="content" placeholder="Écrire un message..." required></textarea>
-        <button type="submit">Envoyer</button>
+        <textarea class="textarea_message" name="content" placeholder="Écrire un message..." required></textarea>
+        <button class="btn-send-msg" type="submit">Envoyer</button>
     </form>
+
+    
 </div>
 
-<style>
-    .messages-box {
-        max-height: 300px;
-        overflow-y: scroll;
-        border: 1px solid #ddd;
-        padding: 10px;
-    }
-    .message {
-        padding: 8px;
-        border-radius: 10px;
-        margin: 5px 0;
-        max-width: 70%;
-    }
-    .sent {
-        background: #dcf8c6;
-        align-self: flex-end;
-        text-align: right;
-    }
-    .received {
-        background: #f1f1f1;
-        align-self: flex-start;
-    }
-</style>
+<a href="{{ route('messages.list') }}"> retour aux listes</a>
+
+
+
+
 @endsection
 
