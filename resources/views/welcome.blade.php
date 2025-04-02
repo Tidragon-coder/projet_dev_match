@@ -153,6 +153,7 @@ select.form-control:focus {
   margin-top: 50px;
 }
 
+
 </style>
 
 @section('content')
@@ -287,6 +288,10 @@ select.form-control:focus {
 </div>
 
 <script>
+
+
+
+
 function showStep2() {
     document.getElementById("step1").style.display = "none";
     document.getElementById("step3").style.display = "none";
