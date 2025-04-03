@@ -501,9 +501,13 @@ textarea {
     <div class="container">
         <div class="container_logout_match">
            <a href="{{ route('profile') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo MatchWork" class="logo1"></a>
-            <div class="logout_btn_container">
-                <button onclick="location.href='{{ route('logout') }}'">Déconnexion</button>
-            </div>
+            
+            <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+        @csrf
+        <button type="submit" style="background: none; color: #ff4c4c; border: none; font-weight: bold; font-size: 16px; cursor: pointer;">
+            <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+        </button>
+    </form>
         </div>
 
         <div class="infos_container">
