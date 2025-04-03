@@ -5,6 +5,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\SwipeController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,5 +37,14 @@ Route::middleware('auth')->group(function() {
 
     Route::post('/apropos', [FeedbackController::class, 'feedback'])->name('form_feedback'); // faire un feedback
     Route::get('/apropos', [FeedbackController::class, 'showfeedback'])->name('feedback');
+
+    //route msg
+    Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+
+    //list msg
+    Route::get('/messages', [MessageController::class, 'listConversations'])->name('messages.list');
+Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
+
 
 });

@@ -8,6 +8,8 @@
 <div class="nav-register-login">
     <img class="logo1" src="images/logo.png" alt="Logo" width="100px">
 </div>
+
+@if(isset($user))
 <div class="container_profile_match">
     <h2 class="title_page_match">A vos matchs, prêts, partez !</h2>
     <div class="container_picture_profile_match">
@@ -23,55 +25,47 @@
             <button class="match-btn" type="submit" name="direction" value="match">Match</button>
             <button class="pass-btn" type="submit" name="direction" value="pass">Pass</button>
         </form>
-
-        
-
     </div>
 
     <form method="GET" action="{{ route('profile') }}">
-            @csrf
-            <button type="submit">Accéder au profil</button>
-        </form>
+        @csrf
+        <button type="submit">Accéder au profil</button>
+    </form>
 </div>
-   
+@else
+<div class="container_profile_match" style="text-align: center;">
+    <h2 class="title_page_match">Aucun profil disponible</h2>
+    <p style="color: #aaa;">Veuillez réessayer plus tard.</p>
+</div>
+@endif
 
+<!-- Messages -->
+@if(session('message'))
+    <div id="message" class="alert alert-warning">
+        {{ session('message') }}
+    </div>
+@endif
 
+@if(session('popupMessage'))
+    <div style="background-color: #ffc107; color: #000; padding: 10px; margin: 15px auto; border-radius: 10px; text-align: center; max-width: 500px;">
+        {{ session('popupMessage') }}
+    </div>
+@endif  
 
-    <!-- <h2>Profil de {{ $user->pseudo }}</h2> -->
-    
-    <!-- <p>{{ $user->sexe }}</p>
-    <p>Prenom : {{ $user->name }}</p>
-    <p>Année d'expérience : {{ $user->year_experience }}</p>
-    <p>Âge : {{ \Carbon\Carbon::parse($user->date_naissance)->age }} ans</p>
-    <p>Spécialité : {{ $user->speciality }}</p>
-    <p>Biographie : {{ $user->biography }}</p> -->
-
-    <!-- Afficher le message si il est passé via la session -->
+<!-- Script pour faire disparaître l'alerte après 2 secondes -->
+<script>
     @if(session('message'))
-        <div id="message" class="alert alert-warning">
-            {{ session('message') }}
-        </div>
+        setTimeout(function() {
+            let messageElement = document.getElementById('message');
+            if (messageElement) {
+                messageElement.style.transition = "opacity 0.5s ease-out";
+                messageElement.style.opacity = 0;
+                setTimeout(function() {
+                    messageElement.style.display = "none";
+                }, 500);
+            }
+        }, 2000);
     @endif
+</script>
 
-    
-    <!-- Script pour faire disparaître l'alerte après 2 secondes -->
-    <script>
-        
-        @if(session('message'))
-            //2 seconde d'attente
-            setTimeout(function() {
-                let messageElement = document.getElementById('message');
-                if (messageElement) {
-                    // Appliquer une transition de fondu pour l'élément
-                    messageElement.style.transition = "opacity 0.5s ease-out";
-                    messageElement.style.opacity = 0;  // Faire disparaître l'élément
-                    setTimeout(function() {
-                        messageElement.style.display = "none";  // Masquer complètement l'élément après le fondu
-                    }, 500); // Délai de 0.5 seconde après le fondu
-                }
-            }, 2000); // Délai de 2 secondes avant de commencer l'animation
-        @endif
-    </script>
-
-</body>
-</html>
+@endsection
