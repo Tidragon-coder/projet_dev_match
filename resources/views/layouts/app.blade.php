@@ -19,35 +19,35 @@
 </head>
 <body>
 
-    <nav class="nav_fixed">
-        <ul class="container_li_nav">
+@if (!in_array(Route::currentRouteName(), ['login', 'register']))
+        <nav class="nav_fixed">
+            <ul class="container_li_nav">
+                <li class="list_nav">
+                    <a href="{{ route('match') }}">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                </li>
 
-            <li class="list_nav">
-                <a href="{{ route('match') }}">
-                    <i class="fa-solid fa-house"></i>
-                </a>
-            </li>
+                <li class="list_nav">
+                    <a href="{{ route('messages.list') }}">
+                        <i class="fa-solid fa-message"></i>
+                    </a>    
+                </li>
 
-            <li class="list_nav">
-                <a href="{{ route('messages.list') }}">
-                    <i class="fa-solid fa-message"></i>
-                </a>    
-            </li>
+                <li class="list_nav">
+                    <a href="{{ route('profile') }}">
+                        <i class="fa-solid fa-user"></i>
+                    </a> 
+                </li>
 
-            
-            <li class="list_nav">
-                <a href="{{ route('profile') }}">
-                    <i class="fa-solid fa-user"></i>
-                </a> 
-            </li>
-              
-            <li class="list_nav">
-                <a href="{{ route('feedback') }}">
-                    <i class="fa-solid fa-circle-info"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
+                <li class="list_nav">
+                    <a href="{{ route('feedback') }}">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    @endif
     <main>
         @yield('content')
     </main>

@@ -496,6 +496,8 @@ textarea {
         }
 </style>
 @section('content')
+
+
 <div class="nav-register">
     <img class="logo1" src="images/logo.png" alt="Logo">
 </div>
