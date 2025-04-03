@@ -34,7 +34,7 @@
 
     .container_logout_match {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px;
     margin: 30px 0;
@@ -448,13 +448,13 @@
 </div>
 
 <div class="container_logout_match">
-<a href="{{ route('match') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
+<!-- <a href="{{ route('match') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
     <i class="fa-solid fa-fire-flame-curved"></i> Match
-</a>
+</a> -->
 
-<a href="{{ route('messages.list') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
+<!-- <a href="{{ route('messages.list') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
     <i class="fa-solid fa-fire-flame-curved"></i> Messages
-</a>
+</a> -->
 
     <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
         @csrf

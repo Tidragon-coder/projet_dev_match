@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'A propos')
+
+@section('content')
+
 <style>
     body {
         background-color: #080808;
@@ -489,18 +495,13 @@ textarea {
             to { opacity: 0; }
         }
 </style>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback - MatchWork</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
+@section('content')
+<div class="nav-register">
+    <img class="logo1" src="images/logo.png" alt="Logo">
+</div>
     <div class="container">
         <div class="container_logout_match">
-           <a href="{{ route('profile') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo MatchWork" class="logo1"></a>
+           <!-- <a href="{{ route('profile') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo MatchWork" class="logo1"></a> -->
             
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
         @csrf

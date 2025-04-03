@@ -5,7 +5,7 @@
     <img class="logo1" src="images/logo.png" alt="Logo" width="100px">
 </div>
 <h2 class="title_messagerie">Vos discussions</h2>
-<a href="{{ route('profile') }}"> profile</a>
+
 
 <div class="container_all_list_message">
     

@@ -27,10 +27,10 @@
         </form>
     </div>
 
-    <form method="GET" action="{{ route('profile') }}">
+    <!-- <form method="GET" action="{{ route('profile') }}">
         @csrf
         <button type="submit">Accéder au profil</button>
-    </form>
+    </form> -->
 </div>
 @else
 <div class="container_profile_match" style="text-align: center;">
