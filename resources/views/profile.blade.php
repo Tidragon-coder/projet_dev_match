@@ -448,9 +448,13 @@
 </div>
 
 <div class="container_logout_match">
-    <a href="{{ route('match') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
-        <i class="fa-solid fa-fire-flame-curved"></i> Matcher 
-    </a>
+<a href="{{ route('match') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
+    <i class="fa-solid fa-fire-flame-curved"></i> Match
+</a>
+
+<a href="{{ route('messages.list') }}" style="color: #FFC848; font-weight: bold; text-decoration: none;">
+    <i class="fa-solid fa-fire-flame-curved"></i> Messages
+</a>
 
     <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
         @csrf

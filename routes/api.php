@@ -6,7 +6,8 @@ use App\Http\Controllers\ProjetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SwipeController;
- 
+use App\Http\Controllers\MessageController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,4 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/swipe', [SwipeController::class, 'store']); // Ajouter un projet
     Route::get('/projets', [ProjetController::class, 'index']);  // Voir tous les projets
     Route::delete('/projets/{projet}', [ProjetController::class, 'destroy']); // Supprimer un projet
+
+    // route mesg
+    Route::get('/messages/{match_id}', [MessageController::class, 'index']);
+    Route::post('/messages', [MessageController::class, 'store']);
 });
