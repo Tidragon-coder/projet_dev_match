@@ -53,6 +53,13 @@
         </div>
     @endif
 
+    @if(session('popupMessage'))
+        <div style="background-color: #ffc107; color: #000; padding: 10px; margin: 15px auto; border-radius: 10px; text-align: center; max-width: 500px;">
+            {{ session('popupMessage') }}
+        </div>
+    @endif  
+
+
     
     <!-- Script pour faire disparaître l'alerte après 2 secondes -->
     <script>
