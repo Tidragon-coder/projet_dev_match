@@ -279,7 +279,6 @@ form {
     position: relative;
     width: 100%;
     padding: 20px;
-    border: 1px solid var(--border-color);
 }
 
 .logo1 {
