@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\SwipeController;
@@ -32,6 +33,11 @@ Route::middleware('auth')->group(function() {
     Route::post('/projets', [ProjetController::class, 'store'])->name('projets.store');
     Route::delete('/projets/{id}', [ProjetController::class, 'destroy'])->name('projets.destroy');
 
+    
+
+    Route::post('/apropos', [FeedbackController::class, 'feedback'])->name('form_feedback'); // faire un feedback
+    Route::get('/apropos', [FeedbackController::class, 'showfeedback'])->name('feedback');
+
     //route msg
     Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
@@ -39,5 +45,6 @@ Route::middleware('auth')->group(function() {
     //list msg
     Route::get('/messages', [MessageController::class, 'listConversations'])->name('messages.list');
 Route::get('/messages/{match_id}', [MessageController::class, 'index'])->name('messages.index');
+
 
 });

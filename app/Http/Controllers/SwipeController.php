@@ -12,24 +12,32 @@ use Illuminate\Support\Carbon;
 class SwipeController extends Controller
 {
     public function store(Request $request)
-    {
-        $request->validate([
-            'swiped_user_id' => 'required|exists:users,id',
-            'direction' => 'required|in:match,pass',
-        ]);
 
-        $user = Auth::user();
-        $targetUserId = $request->swiped_user_id;
-        $direction = $request->direction;
+{
+    $request->validate([
+        'swiped_user_id' => 'required|exists:users,id',
+        'direction' => 'required|in:match,pass',
+    ]);
 
-        // Limite de 10 swipes par jour
-        $todaySwipeCount = Swipe::where('swiper_user_id', $user->id)
-            ->whereDate('created_at', Carbon::today())
-            ->count();
+    $user = Auth::user();
 
-        if ($todaySwipeCount >= 100) {
-            return $this->responseHandler($request, "Vous avez atteint la limite de 10 swipes pour aujourd'hui.", 403, true);
-        }
+    $todaySwipeCount = Swipe::where('swiper_user_id', $user->id)
+    ->whereDate('created_at', Carbon::today())
+    ->count();
+
+    if ($todaySwipeCount >= 100) {
+        return response()->json([
+            'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
+        ], 403);
+    }
+
+    $targetUserId = $request->swiped_user_id;
+    $direction = $request->direction;
+
+    if ($user->id == $targetUserId) {
+        return response()->json(['message' => 'Impossible de swiper votre propre profil.'], 400);
+    }
+
 
         // Empêcher de swiper soi-même
         if ($user->id == $targetUserId) {
