@@ -31,9 +31,14 @@ class feedbackController extends Controller
         
 
         // Redirection avec message de succès
-        return response()->json([
-            'message' => 'Feedback enregistré avec succès.',
-        ], 201);
+        // return response()->json([
+        //     'message' => 'Feedback enregistré avec succès.',
+        // ], 201);
+
+        return redirect()->route('feedback')->with([
+            'popupMessage' => 'Comentaire envoyé !',
+            'popupColor' => 'rgb(49, 184, 49)' 
+        ]);
     }
     
     public function showfeedback(){

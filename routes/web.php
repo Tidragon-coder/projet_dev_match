@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function() {
 
     
 
-    Route::post('/apropos', [FeedbackController::class, 'feedback']); // faire un feedback
+    Route::post('/apropos', [FeedbackController::class, 'feedback'])->name('form_feedback'); // faire un feedback
     Route::get('/apropos', [FeedbackController::class, 'showfeedback'])->name('feedback');
 
 });
