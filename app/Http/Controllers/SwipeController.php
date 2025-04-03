@@ -26,10 +26,15 @@ class SwipeController extends Controller
     ->count();
 
     if ($todaySwipeCount >= 100) {
-        return response()->json([
-            'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
-        ], 403);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Vous avez atteint la limite de 10 swipes pour aujourd\'hui.'
+            ], 403);
+        }
+    
+        return redirect()->route('match')->with('popupMessage', 'Vous avez atteint la limite de 10 swipes. Réessayez dans 2 minutes.');
     }
+    
 
     $targetUserId = $request->swiped_user_id;
     $direction = $request->direction;

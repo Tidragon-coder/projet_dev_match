@@ -22,8 +22,8 @@
         <form method="POST" action="{{ route('swipe.store') }}">
             @csrf
             <input class="swiped_user_id" type="hidden" name="swiped_user_id" value="{{ $user->id }}">
-            <button class="match-btn" type="submit" name="direction" value="match">Match</button>
-            <button class="pass-btn" type="submit" name="direction" value="pass">Pass</button>
+            <button class="match-btn" id="matchBtn" type="submit" name="direction" value="match">Match</button>
+            <button class="pass-btn" id="passBtn" type="submit" name="direction" value="pass">Pass</button>
         </form>
     </div>
 
@@ -67,5 +67,32 @@
         }, 2000);
     @endif
 </script>
+
+@if(session('popupMessage') && str_contains(session('popupMessage'), 'limite'))
+<script>
+    // Désactiver les boutons
+    document.addEventListener("DOMContentLoaded", function() {
+        const matchBtn = document.getElementById("matchBtn");
+        const passBtn = document.getElementById("passBtn");
+
+        if (matchBtn && passBtn) {
+            matchBtn.disabled = true;
+            passBtn.disabled = true;
+
+            matchBtn.style.opacity = 0.5;
+            passBtn.style.opacity = 0.5;
+
+            // Optionnel : réactiver après 2 minutes (120000 ms)
+            setTimeout(() => {
+                matchBtn.disabled = false;
+                passBtn.disabled = false;
+                matchBtn.style.opacity = 1;
+                passBtn.style.opacity = 1;
+            }, 120000);
+        }
+    });
+</script>
+@endif
+
 
 @endsection
