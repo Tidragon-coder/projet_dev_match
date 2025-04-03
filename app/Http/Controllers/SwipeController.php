@@ -27,7 +27,7 @@ class SwipeController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->count();
 
-        if ($todaySwipeCount >= 10) {
+        if ($todaySwipeCount >= 100) {
             return $this->responseHandler($request, "Vous avez atteint la limite de 10 swipes pour aujourd'hui.", 403, true);
         }
 
