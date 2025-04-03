@@ -16,7 +16,7 @@ class feedbackController extends Controller
         return Projet::with('user')->get();
     }
 
-    public function feedback(request $request){
+    public function feedback(Request $request){
        
         // Valider les données
         $request->validate([
@@ -28,6 +28,7 @@ class feedbackController extends Controller
             'user_id'=> auth()->id(), 
             'feedback' => $request->input('feedback'),
         ]);
+        
 
         // Redirection avec message de succès
         return response()->json([
@@ -35,5 +36,8 @@ class feedbackController extends Controller
         ], 201);
     }
     
+    public function showfeedback(){
+        return view('feedback');
+    }
 
 }

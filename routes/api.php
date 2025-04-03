@@ -35,5 +35,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/projets/{projet}', [ProjetController::class, 'destroy']); // Supprimer un projet
 
     Route::post('/apropos', [FeedbackController::class, 'feedback']); // faire un feedback
-    Route::get('/apropos', [FeedbackController::class, 'swhowapropos']); // Voir la page apropos
 });

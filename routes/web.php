@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\SwipeController;
@@ -30,5 +31,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/profile', [ProjetController::class, 'indexView'])->name('profile');
     Route::post('/projets', [ProjetController::class, 'store'])->name('projets.store');
     Route::delete('/projets/{id}', [ProjetController::class, 'destroy'])->name('projets.destroy');
+
+    
+
+    Route::post('/apropos', [FeedbackController::class, 'feedback']); // faire un feedback
+    Route::get('/apropos', [FeedbackController::class, 'showfeedback'])->name('feedback');
 
 });
