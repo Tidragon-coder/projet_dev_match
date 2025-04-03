@@ -28,7 +28,7 @@
     
 </div>
 
-<a href="{{ route('messages.list') }}"> retour aux listes</a>
+<!-- <a href="{{ route('messages.list') }}"> retour aux listes</a> -->
 
 
 

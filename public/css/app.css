@@ -667,18 +667,18 @@ body {
 }
 
 #message {
-    position: fixed; /* Garde l'élément en place même au scroll */
-    top: 50%; /* Positionne au milieu verticalement */
-    left: 50%; /* Positionne au milieu horizontalement */
-    transform: translate(-50%, -50%); /* Centre précisément */
-    width: 50%; /* La div prend la moitié de l'écran */
-    padding: 15px; /* Ajoute un peu d'espace autour du texte */
-    text-align: center; /* Centre le texte */
-    background-color: rgba(255, 193, 7, 0.9); /* Couleur jaune avec transparence */
-    color: black; /* Couleur du texte */
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 50%; 
+    padding: 15px; 
+    text-align: center; 
+    background-color: rgba(255, 193, 7, 0.9);
+    color: black; 
     font-weight: bold;
-    border-radius: 10px; /* Coins arrondis */
-    z-index: 1000; /* S'assure qu'il est au-dessus des autres éléments */
+    border-radius: 10px; 
+    z-index: 1000; 
 }
 
 /**** list discussion page ****/
@@ -736,7 +736,7 @@ body {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    max-height: 300px;
+    height: 500px;
     overflow-y: scroll;
     border: 1px solid var(--border-color);
     padding: 10px;
