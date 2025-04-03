@@ -741,7 +741,6 @@ body {
     overflow-y: scroll;
     border: 1px solid var(--border-color);
     padding: 10px;
-    display:
 }
 .message {
     width: 50%;
