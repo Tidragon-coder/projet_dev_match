@@ -775,14 +775,13 @@ body {
 
 .nav_fixed {
     color: var(--accent-color);
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--white);
     width: 100%;
     /* height: 70px; */
-    bottom: 0;
+
     padding: 15px;
 }
 

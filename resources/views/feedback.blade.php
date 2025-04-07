@@ -522,7 +522,7 @@ textarea {
 
         <div class="infos_container">
             <div class="info_user_picture">
-                <img src="{{ asset('images/groupe.png') }}" alt="Photo Groupe">
+                <img class="photo_groupe" src="{{ asset('images/groupe.jpg') }}" alt="Photo Groupe">
             </div>
             <p>L’équipe Match Work ❤️</p>
         </div>
